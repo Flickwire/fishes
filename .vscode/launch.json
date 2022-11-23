@@ -5,12 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-        "type": "firefox",
-        "request": "launch",
-        "name": "Debug",
-        "preLaunchTask": "webpack: dev server",
-        "url": "http://localhost:8080",
-        "webRoot": "${workspaceFolder}/src"
+            "type": "firefox",
+            "request": "launch",
+            "name": "Debug",
+            "preLaunchTask": "webpack: dev server",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}/src",
+            "pathMappings": [
+                {
+                    "url": "webpack://fishes/src",
+                    "path": "${workspaceFolder}/src"
+                }
+            ]
         }
     ]
 }
