@@ -1,16 +1,16 @@
-const path = require("path");
-const webpack = require('webpack'); 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const path = require('path')
+const webpack = require('webpack') 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 module.exports = {
-  mode: "production",
-  entry: "./src/main.ts",
+  mode: 'production',
+  entry: './src/main.ts',
   output: {
-    filename: `[name].[contenthash].js`,
-    path: path.resolve(__dirname, "dist")
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
@@ -25,7 +25,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader
           },
-          "css-loader"
+          'css-loader'
         ]
       }
     ]
@@ -35,7 +35,7 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      `...`,
+      '...',
       new CssMinimizerPlugin(),
     ],
   },
@@ -48,8 +48,8 @@ module.exports = {
     ),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css"
+      filename: '[name].[contenthash].css'
     })
   ],
-  devtool: "source-map"
-};
+  devtool: 'source-map'
+}

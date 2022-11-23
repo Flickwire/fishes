@@ -1,18 +1,18 @@
-const path = require("path");
-const webpack = require('webpack'); 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path')
+const webpack = require('webpack') 
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  mode: "development",
-  entry: "./src/main.ts",
+  mode: 'development',
+  entry: './src/main.ts',
   output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
   devServer: {
     historyApiFallback: true,
   },
-  devtool: "eval-cheap-module-source-map",
+  devtool: 'eval-cheap-module-source-map',
   plugins: [
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
@@ -28,11 +28,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
   resolve: {
     extensions: ['.ts', '.js', '.json']
   }
-};
+}
