@@ -6,10 +6,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
-  mode: "production", // this trigger webpack out-of-box prod optimizations
-  entry: "./index.ts",
+  mode: "production",
+  entry: "./src/main.ts",
   output: {
-    filename: `[name].[hash].js`, // [hash] is useful for cache busting!
+    filename: `[name].[contenthash].js`,
     path: path.resolve(__dirname, "dist")
   },
   module: {
@@ -51,5 +51,5 @@ module.exports = {
       filename: "[name].[contenthash].css"
     })
   ],
-  devtool: "source-map" // supposedly the ideal type without bloating bundle size
+  devtool: "source-map"
 };
