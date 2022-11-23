@@ -1,31 +1,9 @@
-export class Fish {
-  birthday: number
-  age: number
+import { Entity } from "./entity"
+import { Age } from "./thoughts/age"
 
+export class Fish extends Entity {
   constructor() {
-    this.birthday = window.performance.now()
-    this.age = 0
-    console.log(`Fish is born at ${this.birthday}`)
-    this.doThinking()
-  }
-
-  updateAge(): void {
-    const time = window.performance.now()
-    if (time - this.birthday > 1000) {
-      this.age += 1
-      this.birthday = time
-      console.log(`Fish is ${this.age} seconds old`)
-    }
-  }
-
-  think(): void {
-    this.updateAge()
-  }
-
-  async doThinking(): Promise<void> {
-    for (;;) {
-      this.think()
-      await new Promise(r => setTimeout(r, 1));
-    }
+    super('Fish')
+    this.thoughts.push(new Age())
   }
 }
