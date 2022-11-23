@@ -19,3 +19,5 @@ rules:
   no-implied-eval: error
   prefer-promise-reject-errors: warn
   indent: ["error", 2]
+  "@typescript-eslint/no-explicit-any":
+    - off

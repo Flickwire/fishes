@@ -1,9 +1,9 @@
-import { Entity } from "./entity"
-import { Age } from "./thoughts/age"
+import { Entity } from "./engine/entity"
+import { Age } from "./components/age"
 
 export class Fish extends Entity {
   constructor() {
     super('Fish')
-    this.thoughts.push(new Age())
+    this.components.push(new Age(this))
   }
 }
