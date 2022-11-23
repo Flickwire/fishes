@@ -1,13 +1,13 @@
 {
   "name": "fishes",
   "version": "1.0.0",
+  "packageManager": "yarn@3.3.0",
   "description": "Browser toy with fish",
   "main": "index.js",
   "author": "Skye Brady <skye@blueskye.co.uk>",
   "license": "MIT",
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
-    "closure-webpack-plugin": "^2.6.1",
     "css-loader": "^6.7.2",
     "css-minimizer-webpack-plugin": "^4.2.2",
     "google-closure-compiler": "^20221102.0.1",

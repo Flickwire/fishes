@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const ClosurePlugin = require('closure-webpack-plugin');
 
 module.exports = {
   mode: "production", // this trigger webpack out-of-box prod optimizations
@@ -37,7 +36,6 @@ module.exports = {
   optimization: {
     minimizer: [
       `...`,
-      new ClosurePlugin(),
       new CssMinimizerPlugin(),
     ],
   },
