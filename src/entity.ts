@@ -19,11 +19,10 @@ export class Entity {
     });
   }
 
-  async doThinking(): Promise<void> {
-    for (;;) {
+  doThinking(): void {
+    setInterval(() => {
       this.think()
-      await new Promise(r => setTimeout(r, 1));
-    }
+    }, 0)
   }
 
 
