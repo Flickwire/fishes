@@ -1,5 +1,5 @@
 import { Position } from "../components/position";
-import { Component, ComponentProps, Entity } from "../engine/entity";
+import { Component, ComponentUpdateProps, Entity } from "../engine/entity";
 import { Vector2 } from "../engine/types/vector2";
 
 class MeasureFPS implements Component {
@@ -12,7 +12,7 @@ class MeasureFPS implements Component {
     entity.props.fpsLastUpdate = 0
   }
 
-  update({ time, entity, lastTime }: ComponentProps): void {
+  update({ time, entity, lastTime }: ComponentUpdateProps): void {
     if (time - entity.props.fpsLastUpdate > 100) {
       entity.props.fps = 1000 / (time - lastTime)
       entity.props.fpsLastUpdate = time

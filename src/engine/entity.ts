@@ -1,16 +1,21 @@
 import { World } from "./world";
 
-export type ComponentProps = {
-  entity: Entity,
-  world: World,
+export type ComponentUpdateProps = {
   time: number,
   lastTime: number
 }
 
 export interface Component {
     update?: (
-      { entity, world, time, lastTime }: ComponentProps
+      { time, lastTime }: ComponentUpdateProps
       ) => void
+}
+
+export abstract class Component {
+  entity: Entity
+  constructor(entity: Entity){
+    this.entity = entity
+  }
 }
 
 export interface Entity {
@@ -39,7 +44,7 @@ export abstract class Entity {
   }
 
   update(world: World, time: number, lastTime: number): void {
-    const parameters: ComponentProps = {entity: this, world, time, lastTime}
+    const parameters: ComponentUpdateProps = {time, lastTime}
     this.subscribedComponents.forEach(component => {
       component.update(parameters)
     });
