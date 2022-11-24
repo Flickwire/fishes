@@ -21,9 +21,10 @@ export class World {
       entity.update(this, time, this.lastUpdate)
     })
     this.lastUpdate = time
+    setTimeout(this.update, 0)
   }
 
   run = (): void => {
-    setInterval(this.update, 0)
+    setTimeout(this.update, 0)
   }
 }

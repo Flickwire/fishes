@@ -16,21 +16,28 @@ export interface Component {
 export class Entity {
   name: string
   components: Component[]
+  subscribedComponents: Component[]
   props: {[key: string]: any}
 
   constructor(name: string) {
     this.props = {}
     this.props.name = name
     this.components = []
+    this.subscribedComponents = []
     console.log(`Spawned entity ${this.props.name}`)
+  }
+
+  attachComponent(component: Component): void {
+    this.components.push(component)
+    if (typeof component.update === 'function') {
+      this.subscribedComponents.push(component)
+    }
   }
 
   update(world: World, time: number, lastTime: number): void {
     const parameters: ComponentProps = {entity: this, world, time, lastTime}
-    this.components.forEach(component => {
-      if (typeof component.update === 'function') {
-        component.update(parameters)
-      }
+    this.subscribedComponents.forEach(component => {
+      component.update(parameters)
     });
   }
 
