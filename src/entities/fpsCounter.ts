@@ -2,20 +2,21 @@ import { Position } from "../components/position";
 import { Component, ComponentUpdateProps, Entity } from "../engine/entity";
 import { Vector2 } from "../engine/types/vector2";
 
-class MeasureFPS implements Component {
+class MeasureFPS extends Component {
 
   birthday: number
   age: number
 
   constructor(entity: Entity) {
+    super(entity)
     entity.props.fps = 0
     entity.props.fpsLastUpdate = 0
   }
 
-  update({ time, entity, lastTime }: ComponentUpdateProps): void {
-    if (time - entity.props.fpsLastUpdate > 100) {
-      entity.props.fps = 1000 / (time - lastTime)
-      entity.props.fpsLastUpdate = time
+  update = ({ time, lastTime }: ComponentUpdateProps): void => {
+    if (time - this.entity.props.fpsLastUpdate > 100) {
+      this.entity.props.fps = 1000 / (time - lastTime)
+      this.entity.props.fpsLastUpdate = time
     }
   }
 }
