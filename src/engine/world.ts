@@ -2,6 +2,7 @@ import { Entity } from "./entity";
 
 export class World {
   entities: Entity[]
+  drawableEntities: Entity[]
   lastUpdate: number
   canvas: HTMLCanvasElement
   renderContext: CanvasRenderingContext2D
@@ -14,11 +15,15 @@ export class World {
     console.log("world exists")
     this.lastUpdate = window.performance.now()
     this.entities = []
+    this.drawableEntities = []
     this.run()
   }
   
   spawnEntity = (entity: Entity): void => {
     this.entities.push(entity)
+    if (typeof entity.draw === 'function') {
+      this.drawableEntities.push(entity)
+    }
   }
   
   update = (): void => {
@@ -39,7 +44,7 @@ export class World {
       this.canvas.height = window.visualViewport.height
     }
     this.renderContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.entities.map((entity) => {
+    this.drawableEntities.map((entity) => {
       entity.draw(this.renderContext)
     })
   }

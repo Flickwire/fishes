@@ -13,7 +13,11 @@ export interface Component {
       ) => void
 }
 
-export class Entity {
+export interface Entity {
+  draw?(ctx: CanvasRenderingContext2D): void
+}
+
+export abstract class Entity {
   name: string
   components: Component[]
   subscribedComponents: Component[]
@@ -39,10 +43,6 @@ export class Entity {
     this.subscribedComponents.forEach(component => {
       component.update(parameters)
     });
-  }
-
-  draw(ctx: CanvasRenderingContext2D): void {
-    return
   }
 
   getProp(name: string, dfault: any): any {

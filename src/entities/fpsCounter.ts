@@ -1,5 +1,4 @@
 import { Component, ComponentProps, Entity } from "../engine/entity";
-import { World } from "../engine/world";
 
 class MeasureFPS implements Component {
 
@@ -26,8 +25,8 @@ export class FpsCounter extends Entity {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    ctx.strokeStyle = 'red'
+    ctx.fillStyle = 'black'
     ctx.font = '24px sans-serif'
-    ctx.strokeText(`${Math.floor(this.getProp('fps', 0))}`, this.getProp('positionX', 10) as number, this.getProp('positionY',30) as number)
+    ctx.fillText(`${Math.floor(this.getProp('fps', 0))}`, this.getProp('positionX', 10) as number, this.getProp('positionY',30) as number)
   }
 }

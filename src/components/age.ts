@@ -10,7 +10,7 @@ export class Age implements Component {
     entity.props.age = 0
   }
 
-  update({ time, entity, lastTime }: ComponentProps): void {
+  update({ time, entity }: ComponentProps): void {
     if (time - entity.props.birthday > 1000) {
       entity.props.age += 1
       entity.props.birthday = time
