@@ -20,13 +20,10 @@ export class World {
     this.entities.map((entity) => {
       entity.update(this, time, this.lastUpdate)
     })
-    console.log(`update at ${time}`)
     this.lastUpdate = time
   }
 
   run = (): void => {
-    for (;;) {
-      setTimeout(this.update, 10)
-    }
+    setInterval(this.update, 0)
   }
 }
