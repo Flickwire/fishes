@@ -1,5 +1,4 @@
 import { Position } from "../components/position";
-import { Velocity } from "../components/velocity";
 import { Component, ComponentProps, Entity } from "../engine/entity";
 import { Vector2 } from "../engine/types/vector2";
 
@@ -26,7 +25,6 @@ export class FpsCounter extends Entity {
     super('FPSCounter')
     this.attachComponent(new Position(this, 10, 30))
     this.attachComponent(new MeasureFPS(this))
-    this.attachComponent(new Velocity(this, new Vector2(1, 3)))
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
