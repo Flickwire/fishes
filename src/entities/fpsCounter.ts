@@ -25,7 +25,7 @@ export class FpsCounter extends Entity {
   constructor() {
     super('FPSCounter')
     this.attachComponent(new Position(this, 10, 30))
-    this.attachComponent(new MeasureFPS(this))
+      .attachComponent(new MeasureFPS(this))
   }
 
   draw(ctx: CanvasRenderingContext2D): void {

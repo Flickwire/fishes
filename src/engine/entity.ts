@@ -36,11 +36,12 @@ export abstract class Entity {
     console.log(`Spawned entity ${this.props.name}`)
   }
 
-  attachComponent(component: Component): void {
+  attachComponent(component: Component): Entity {
     this.components.push(component)
     if (typeof component.update === 'function') {
       this.subscribedComponents.push(component)
     }
+    return this
   }
 
   update(world: World, time: number, lastTime: number): void {
@@ -50,7 +51,7 @@ export abstract class Entity {
     });
   }
 
-  getProp(name: string, dfault: any): any {
+  getProp(name: string, dfault: any = null): any {
     if (typeof this.props[name] !== 'undefined') {
       return this.props[name]
     }

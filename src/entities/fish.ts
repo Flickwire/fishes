@@ -9,9 +9,9 @@ export class Fish extends Entity {
   constructor() {
     super('Fish')
     this.attachComponent(new Position(this, 50, 50))
-    this.attachComponent(new Color(this, 240, 100, 50, 255))
-    this.attachComponent(new Age(this))
-    this.attachComponent(new Velocity(this, new Vector2(1, 3)))
+      .attachComponent(new Color(this, 240, 100, 50, 255))
+      .attachComponent(new Age(this))
+      .attachComponent(new Velocity(this, new Vector2(1, 3)))
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
