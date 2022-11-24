@@ -1,10 +1,11 @@
 import { Component, ComponentUpdateProps, Entity } from "../engine/entity"
 import { Vector2 } from "../engine/types/vector2"
+import { Position } from "./position";
 
 export class Velocity extends Component {
   constructor(entity: Entity, magnitude: Vector2 = (new Vector2())) {
     super(entity)
-    if (!(entity.getProp('position',0) instanceof Vector2)) {
+    if (!entity.hasComponentOfType(Position)) {
       throw new Error('Please add position component before velocity component');
     }
     entity.props.velocity = magnitude

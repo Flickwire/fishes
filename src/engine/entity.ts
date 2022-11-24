@@ -44,17 +44,17 @@ export abstract class Entity {
     return this
   }
 
-  getComponentOfType(type: string){
-    console.log(this.components)
-    console.log(type)
-    if (typeof this.components[type] !== 'undefined' && this.components[type] instanceof Component) {
-      return this.components[type]
+  getComponentOfType(type: typeof Component){
+    const typeName = type.name
+    if (typeof this.components[typeName] !== 'undefined' && this.components[typeName] instanceof Component) {
+      return this.components[typeName]
     }
     return null
   }
 
-  hasComponentOfType(type: string){
-    if (typeof this.components[type] !== 'undefined' && this.components[type] instanceof Component) {
+  hasComponentOfType(type: typeof Component){
+    const typeName = type.name
+    if (typeof this.components[typeName] !== 'undefined' && this.components[typeName] instanceof Component) {
       return true
     }
     return false
