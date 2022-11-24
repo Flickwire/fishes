@@ -24,24 +24,40 @@ export interface Entity {
 
 export abstract class Entity {
   name: string
-  components: Component[]
+  components: {[key: string]: Component}
   subscribedComponents: Component[]
   props: {[key: string]: any}
 
   constructor(name: string) {
     this.props = {}
     this.props.name = name
-    this.components = []
+    this.components = {}
     this.subscribedComponents = []
     console.log(`Spawned entity ${this.props.name}`)
   }
 
   attachComponent(component: Component): Entity {
-    this.components.push(component)
+    this.components[component.constructor.name] = component
     if (typeof component.update === 'function') {
       this.subscribedComponents.push(component)
     }
     return this
+  }
+
+  getComponentOfType(type: string){
+    console.log(this.components)
+    console.log(type)
+    if (typeof this.components[type] !== 'undefined' && this.components[type] instanceof Component) {
+      return this.components[type]
+    }
+    return null
+  }
+
+  hasComponentOfType(type: string){
+    if (typeof this.components[type] !== 'undefined' && this.components[type] instanceof Component) {
+      return true
+    }
+    return false
   }
 
   update(world: World, time: number, lastTime: number): void {
