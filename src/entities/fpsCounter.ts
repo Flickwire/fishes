@@ -13,11 +13,11 @@ class MeasureFPS extends Component {
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {
-    if (this.frameTimes.length >= 400){
+    if (this.frameTimes.length >= 200){
       this.frameTimes.shift()
     }
     this.frameTimes.push(time - lastTime)
-    this.entity.props.fps = Math.floor(1000/this.frameTimes.reduce((p, c, i) => p+(c-p)/(i+1)))
+    this.entity.props.fps = Math.floor(1000/(this.frameTimes.reduce((a, b) => a + b, 0) / this.frameTimes.length))
   }
 }
 
