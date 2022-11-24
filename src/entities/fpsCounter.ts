@@ -1,4 +1,7 @@
+import { Position } from "../components/position";
+import { Velocity } from "../components/velocity";
 import { Component, ComponentProps, Entity } from "../engine/entity";
+import { Vector2 } from "../engine/types/vector2";
 
 class MeasureFPS implements Component {
 
@@ -21,12 +24,15 @@ class MeasureFPS implements Component {
 export class FpsCounter extends Entity {
   constructor() {
     super('FPSCounter')
+    this.attachComponent(new Position(this, 10, 30))
     this.attachComponent(new MeasureFPS(this))
+    this.attachComponent(new Velocity(this, new Vector2(1, 3)))
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = 'black'
     ctx.font = '24px sans-serif'
-    ctx.fillText(`${Math.floor(this.getProp('fps', 0))}`, this.getProp('positionX', 10) as number, this.getProp('positionY',30) as number)
+    const position: Vector2 = this.props.position
+    ctx.fillText(`${Math.floor(this.getProp('fps', 0))}`, position.x, position.y)
   }
 }
