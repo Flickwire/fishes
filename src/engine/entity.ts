@@ -46,7 +46,7 @@ export abstract class Entity {
 
   getComponentOfType(type: typeof Component){
     const typeName = type.name
-    if (typeof this.components[typeName] !== 'undefined' && this.components[typeName] instanceof Component) {
+    if (typeof this.components[typeName] !== 'undefined' && this.components[typeName] instanceof type) {
       return this.components[typeName]
     }
     return null
@@ -54,7 +54,7 @@ export abstract class Entity {
 
   hasComponentOfType(type: typeof Component){
     const typeName = type.name
-    if (typeof this.components[typeName] !== 'undefined' && this.components[typeName] instanceof Component) {
+    if (typeof this.components[typeName] !== 'undefined' && this.components[typeName] instanceof type) {
       return true
     }
     return false
