@@ -41,6 +41,10 @@ export class Entity {
     });
   }
 
+  draw(ctx: CanvasRenderingContext2D): void {
+    return
+  }
+
   getProp(name: string, dfault: any): any {
     if (typeof this.props[name] !== 'undefined') {
       return this.props[name]

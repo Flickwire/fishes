@@ -3,8 +3,14 @@ import { Entity } from "./entity";
 export class World {
   entities: Entity[]
   lastUpdate: number
+  canvas: HTMLCanvasElement
+  renderContext: CanvasRenderingContext2D
 
   constructor () {
+    this.canvas = document.createElement('canvas')
+    this.canvas.id = 'pond'
+    this.renderContext = this.canvas.getContext('2d')
+    document.body.append(this.canvas)
     console.log("world exists")
     this.lastUpdate = window.performance.now()
     this.entities = []
@@ -21,7 +27,21 @@ export class World {
       entity.update(this, time, this.lastUpdate)
     })
     this.lastUpdate = time
+    this.draw()
     setTimeout(this.update, 0)
+  }
+
+  draw = (): void => {
+    if (this.canvas.width != window.visualViewport.width) {
+      this.canvas.width = window.visualViewport.width
+    }
+    if (this.canvas.height != window.visualViewport.height) {
+      this.canvas.height = window.visualViewport.height
+    }
+    this.renderContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.entities.map((entity) => {
+      entity.draw(this.renderContext)
+    })
   }
 
   run = (): void => {
