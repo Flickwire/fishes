@@ -4,20 +4,20 @@ import { Vector2 } from "../engine/types/vector2";
 
 class MeasureFPS extends Component {
 
-  birthday: number
-  age: number
+  frameTimes: number[]
 
   constructor(entity: Entity) {
     super(entity)
     entity.props.fps = 0
-    entity.props.fpsLastUpdate = 0
+    this.frameTimes = 
+        []
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {
-    if (time - this.entity.props.fpsLastUpdate > 100) {
-      this.entity.props.fps = 1000 / (time - lastTime)
-      this.entity.props.fpsLastUpdate = time
-    }
+    if (this.frameTimes.length >= 200)
+    this.frameTimes.shift()
+    this.frameTimes.push(time - lastTime)
+    this.entity.props.fps = Math.floor(1000/(this.frameTimes.reduce((a, b) => a + b, 0) / this.frameTimes.length))
   }
 }
 
