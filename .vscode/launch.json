@@ -10,7 +10,7 @@
             "name": "Debug",
             "preLaunchTask": "webpack: dev server",
             "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}/src"
+            "webRoot": "${workspaceRoot}"
         }
     ]
 }
