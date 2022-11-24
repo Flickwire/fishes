@@ -14,7 +14,6 @@ export class Age implements Component {
     if (time - entity.props.birthday > 1000) {
       entity.props.age += 1
       entity.props.birthday = time
-      console.log(`${entity.getProp('name', 'Unknown Entity')} is ${entity.props.age} seconds old`)
     }
   }
 }
