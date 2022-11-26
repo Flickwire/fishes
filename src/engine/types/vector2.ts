@@ -18,4 +18,11 @@ export class Vector2 {
   magnitude(): number {
     return Math.sqrt((this.x * this.x) + (this.y * this.y))
   }
+
+  vectorTo(otherPosition: Vector2): Vector2 {
+    return new Vector2(
+      otherPosition.x - this.x,
+      otherPosition.y - this.y
+    )
+  }
 }
