@@ -1,4 +1,5 @@
 import { Component, ComponentUpdateProps, Entity } from "../engine/entity"
+import { Energy } from "./energy";
 import { Facing } from "./facing";
 import { Velocity } from "./velocity";
 
@@ -13,6 +14,8 @@ export class FacingAlignedImpulse extends Component {
   facing: Facing
   lastApplied: number
   nextApply: number
+  consumesEnergy: boolean
+  energy: Energy
 
   constructor(entity: Entity, magnitude = 0, frequency = 0) {
     super(entity)
@@ -21,6 +24,12 @@ export class FacingAlignedImpulse extends Component {
     }
     if (!entity.hasComponentOfType(Facing)) {
       throw new Error('Please add Facing component before FacingAlignedImpulse component');
+    }
+    this.consumesEnergy = true
+    if (!entity.hasComponentOfType(Energy)) {
+      this.consumesEnergy = false
+    } else {
+      this.energy = this.entity.getComponentOfType(Energy)
     }
     this.magnitude = magnitude
     this.frequency = frequency * 1000
@@ -39,6 +48,10 @@ export class FacingAlignedImpulse extends Component {
       const normal = this.facing.vector.normalise()
       this.velocity.vector.x += normal.x * this.magnitude
       this.velocity.vector.y += normal.y * this.magnitude
+
+      if (this.consumesEnergy) {
+        this.energy.energy -= this.magnitude
+      }
 
       this.lastApplied = time
       this.nextApply += this.frequency

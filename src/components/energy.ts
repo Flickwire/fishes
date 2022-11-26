@@ -10,7 +10,7 @@ export class Energy extends Component {
   }
 
   update = (): void => {
-    if (this.energy == 0) {
+    if (this.energy <= 0) {
       this.entity.world.deleteEntity(this.entity)
     }
   }

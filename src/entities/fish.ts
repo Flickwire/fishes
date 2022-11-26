@@ -85,8 +85,8 @@ export class Fish extends Entity {
         Math.random() - 0.5, 
         Math.random() - 0.5
         ),
-      drag: Math.random() * 50,
-      impulseStrength: (Math.max(Math.random(), 0.5) * 100) - 50,
+      drag: Math.random() * 20,
+      impulseStrength: Math.max(Math.random(),0.1) * 30,
       impulseFrequency: Math.max((Math.random() * 5), 0.1),
       world: world,
       facing: new Vector2(
@@ -99,8 +99,8 @@ export class Fish extends Entity {
         Math.random() * 100, 
         Math.max(0.5,Math.random())
         ),
-      maxAge: Math.floor(Math.max(0.02,Math.random()) * 60),
-      initialEnergy: Math.max(0.1,(Math.random() * 100))
+      maxAge: Math.floor(Math.max(0.02,Math.random()) * 6000),
+      initialEnergy: Math.max(50,(Math.random() * 200))
     }
     return new Fish(props)
   }
