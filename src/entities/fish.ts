@@ -1,14 +1,17 @@
 import { Entity } from "../engine/entity"
-import { Age } from "../components/age"
-import { Position } from "../components/position"
-import { Color } from "../components/color"
-import { Velocity } from "../components/velocity"
 import { Vector2 } from "../engine/types/vector2"
-import { Name } from "../components/name"
-import { Drag } from "../components/drag"
 import { World } from "../engine/world"
-import { MomentumAlignedImpulse } from "../components/momentumAlignedImpulse"
-import { Facing } from "../components/facing"
+
+import {
+  Age,
+  Position,
+  Color,
+  Velocity,
+  Name,
+  Drag,
+  Facing,
+  FacingAlignedImpulse
+} from "../components"
 
 export class Fish extends Entity {
   constructor(world: World) {
@@ -21,7 +24,7 @@ export class Fish extends Entity {
       .attachComponent(new Age(this))
       .attachComponent(new Velocity(this, new Vector2(-100, 60)))
       .attachComponent(new Drag(this, 35))
-      .attachComponent(new MomentumAlignedImpulse(this, (35 * 1.5), 1.5))
+      .attachComponent(new FacingAlignedImpulse(this, (35 * 1.5), 1.5))
   }
 
   draw(ctx: CanvasRenderingContext2D): void {

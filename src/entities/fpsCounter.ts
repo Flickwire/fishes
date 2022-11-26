@@ -1,7 +1,5 @@
-import { Name } from "../components/name";
-import { Position } from "../components/position";
+import { Name, Position } from "../components";
 import { Component, ComponentUpdateProps, Entity } from "../engine/entity";
-import { Vector2 } from "../engine/types/vector2";
 import { World } from "../engine/world";
 
 class MeasureFPS extends Component {
