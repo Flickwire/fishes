@@ -28,6 +28,10 @@ export type FishProps = {
 }
 
 export class Fish extends Entity {
+
+  position: Position
+  color: Color
+
   constructor(props: FishProps) {
     super(props.world)
     this
@@ -40,14 +44,23 @@ export class Fish extends Entity {
       .attachComponent(new Drag(this, props.drag))
       .attachComponent(new FacingAlignedImpulse(this, props.impulseStrength, props.impulseFrequency))
       .attachComponent(new MaxAge(this, props.maxAge))
+
+    this.color = this.getComponentOfType(Color)
+    this.position = this.getComponentOfType(Position)
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    const color: Color = this.getComponentOfType(Color)
-    const position: Position = this.getComponentOfType(Position)
-    ctx.fillStyle = color.toRGBA()
+    if (
+      this.position.x < -10 ||
+      this.position.x > (ctx.canvas.width + 10) ||
+      this.position.y < -10 ||
+      this.position.y > (ctx.canvas.height + 10)
+    ) {
+      return
+    }
+    ctx.fillStyle = this.color.toRGBA()
     ctx.beginPath()
-    ctx.arc(position.x, position.y, 10, 0, 2 * Math.PI, false)
+    ctx.arc(this.position.x, this.position.y, 10, 0, 2 * Math.PI, false)
     ctx.fill()
   }
 
