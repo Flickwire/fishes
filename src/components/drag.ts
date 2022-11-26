@@ -4,6 +4,7 @@ import { Velocity } from "./velocity";
 export class Drag extends Component {
 
   magnitude: number
+  velocity: Velocity
 
   constructor(entity: Entity, magnitude: number = 0) {
     super(entity)
@@ -11,28 +12,28 @@ export class Drag extends Component {
       throw new Error('Please add velocity component before drag component');
     }
     this.magnitude = magnitude
+    this.velocity = this.entity.getComponentOfType(Velocity)
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {
-    const velocity: Velocity = this.entity.getComponentOfType(Velocity)
-    const velocitySum = velocity.x + velocity.y
+    const velocitySum = this.velocity.x + this.velocity.y
     if (velocitySum == 0) {
       return
     }
     const dT = time - lastTime
     const mod = dT / 1000
     const timeCorrectedMagnitude = mod * this.magnitude
-    const propX = velocity.x / velocitySum
-    const propY = velocity.y / velocitySum
-    var newX = velocity.x - (timeCorrectedMagnitude * propX)
-    var newY = velocity.y - (timeCorrectedMagnitude * propY)
-    if (newX > 0 && velocity.x < 0 || newX < 0 && velocity.x > 0) {
+    const propX = this.velocity.x / velocitySum
+    const propY = this.velocity.y / velocitySum
+    var newX = this.velocity.x - (timeCorrectedMagnitude * propX)
+    var newY = this.velocity.y - (timeCorrectedMagnitude * propY)
+    if (newX > 0 && this.velocity.x < 0 || newX < 0 && this.velocity.x > 0) {
       newX = 0
     }
-    if (newY > 0 && velocity.y < 0 || newY < 0 && velocity.y > 0) {
+    if (newY > 0 && this.velocity.y < 0 || newY < 0 && this.velocity.y > 0) {
       newY = 0
     }
-    velocity.x = newX
-    velocity.y = newY
+    this.velocity.x = newX
+    this.velocity.y = newY
   }
 }
