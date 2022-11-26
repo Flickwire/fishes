@@ -14,11 +14,11 @@ export class Fish extends Entity {
     super(world)
     this
       .attachComponent(new Name(this, 'Fish'))
-      .attachComponent(new Position(this, 50, 50))
+      .attachComponent(new Position(this, 200, 200))
       .attachComponent(new Color(this, 240, 100, 50, 255))
       .attachComponent(new Age(this))
-      .attachComponent(new Velocity(this, new Vector2(90, 110)))
-      .attachComponent(new Drag(this, 35))
+      .attachComponent(new Velocity(this, new Vector2(-50, 50)))
+      .attachComponent(new Drag(this, 3))
       .attachComponent(new MomentumAlignedImpulse(this, (35 * 1.5), 1.5))
   }
 

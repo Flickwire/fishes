@@ -4,30 +4,27 @@ import { Position } from "./position";
 
 export class Velocity extends Component {
 
-  x: number
-  y: number
+  vector: Vector2
   position: Position
 
-  constructor(entity: Entity, magnitude: Vector2 = (new Vector2())) {
+  constructor(entity: Entity, vector: Vector2 = (new Vector2())) {
     super(entity)
     if (!entity.hasComponentOfType(Position)) {
       throw new Error('Please add position component before velocity component');
     }
 
     this.position = entity.getComponentOfType(Position)
-    this.x = magnitude.x
-    this.y = magnitude.y
+    this.vector = vector
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {
-    const velocitySum = this.x + this.y
-    if (velocitySum == 0) {
+    if (this.vector.x === 0 && this.vector.y === 0) {
       return
     }
     const dT = time - lastTime
     const mod = dT / 1000
-    const dX = mod * this.x
-    const dY = mod * this.y
+    const dX = mod * this.vector.x
+    const dY = mod * this.vector.y
     this.position.x += dX
     this.position.y += dY
   }

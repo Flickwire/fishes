@@ -26,17 +26,15 @@ export class MomentumAlignedImpulse extends Component {
 
   update = ({ time }: ComponentUpdateProps): void => {
     if (time >= this.nextApply) {
-      const velocitySum = this.velocity.x + this.velocity.y
-      if (velocitySum == 0) {
+      if (this.velocity.vector.x === 0 && this.velocity.vector.y === 0) {
         this.lastApplied = time
         this.nextApply += this.frequency
         return
       }
 
-      const propX = this.velocity.x / velocitySum
-      const propY = this.velocity.y / velocitySum
-      this.velocity.x += propX * this.magnitude
-      this.velocity.y += propY * this.magnitude
+      const normal = this.velocity.vector.normalise()
+      this.velocity.vector.x += normal.x * this.magnitude
+      this.velocity.vector.y += normal.y * this.magnitude
 
       this.lastApplied = time
       this.nextApply += this.frequency

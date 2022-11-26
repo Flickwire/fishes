@@ -16,24 +16,22 @@ export class Drag extends Component {
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {
-    const velocitySum = this.velocity.x + this.velocity.y
-    if (velocitySum == 0) {
+    if (this.velocity.vector.x === 0 && this.velocity.vector.y === 0) {
       return
     }
+    const normal = this.velocity.vector.normalise()
     const dT = time - lastTime
     const mod = dT / 1000
     const timeCorrectedMagnitude = mod * this.magnitude
-    const propX = this.velocity.x / velocitySum
-    const propY = this.velocity.y / velocitySum
-    var newX = this.velocity.x - (timeCorrectedMagnitude * propX)
-    var newY = this.velocity.y - (timeCorrectedMagnitude * propY)
-    if (newX > 0 && this.velocity.x < 0 || newX < 0 && this.velocity.x > 0) {
+    var newX = this.velocity.vector.x - (timeCorrectedMagnitude * normal.x)
+    var newY = this.velocity.vector.y - (timeCorrectedMagnitude * normal.y)
+    if (newX > 0 && this.velocity.vector.x < 0 || newX < 0 && this.velocity.vector.x > 0) {
       newX = 0
     }
-    if (newY > 0 && this.velocity.y < 0 || newY < 0 && this.velocity.y > 0) {
+    if (newY > 0 && this.velocity.vector.y < 0 || newY < 0 && this.velocity.vector.y > 0) {
       newY = 0
     }
-    this.velocity.x = newX
-    this.velocity.y = newY
+    this.velocity.vector.x = newX
+    this.velocity.vector.y = newY
   }
 }
