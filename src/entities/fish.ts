@@ -4,11 +4,14 @@ import { Position } from "../components/position"
 import { Color } from "../components/color"
 import { Velocity } from "../components/velocity"
 import { Vector2 } from "../engine/types/vector2"
+import { Name } from "../components/name"
 
 export class Fish extends Entity {
   constructor() {
     super('Fish')
-    this.attachComponent(new Position(this, 50, 50))
+    this
+      .attachComponent(new Name(this, 'Fish'))
+      .attachComponent(new Position(this, 50, 50))
       .attachComponent(new Color(this, 240, 100, 50, 255))
       .attachComponent(new Age(this))
       .attachComponent(new Velocity(this, new Vector2(1, 3)))
