@@ -8,17 +8,19 @@ import { Name } from "../components/name"
 import { Drag } from "../components/drag"
 import { World } from "../engine/world"
 import { MomentumAlignedImpulse } from "../components/momentumAlignedImpulse"
+import { Facing } from "../components/facing"
 
 export class Fish extends Entity {
   constructor(world: World) {
     super(world)
     this
       .attachComponent(new Name(this, 'Fish'))
-      .attachComponent(new Position(this, 200, 200))
+      .attachComponent(new Position(this, 400, 400))
+      .attachComponent(new Facing(this, new Vector2(4,1)))
       .attachComponent(new Color(this, 240, 100, 50, 255))
       .attachComponent(new Age(this))
-      .attachComponent(new Velocity(this, new Vector2(-50, 50)))
-      .attachComponent(new Drag(this, 3))
+      .attachComponent(new Velocity(this, new Vector2(-100, 60)))
+      .attachComponent(new Drag(this, 35))
       .attachComponent(new MomentumAlignedImpulse(this, (35 * 1.5), 1.5))
   }
 
