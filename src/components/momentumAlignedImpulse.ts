@@ -32,7 +32,6 @@ export class MomentumAlignedImpulse extends Component {
         this.nextApply += this.frequency
         return
       }
-      console.log(`Applying impulse with magnitude ${this.magnitude} at ${time} to velocity of ${this.velocity.x}, ${this.velocity.y}`)
 
       const propX = this.velocity.x / velocitySum
       const propY = this.velocity.y / velocitySum
