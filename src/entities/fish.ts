@@ -71,8 +71,8 @@ export class Fish extends Entity {
         Math.random() * world.canvas.height
         ),
       velocity: new Vector2(
-        (Math.random() * 100) - 50, 
-        (Math.random() * 100) - 50
+        Math.random() - 0.5, 
+        Math.random() - 0.5
         ),
       drag: Math.random() * 50,
       impulseStrength: (Math.random() * 100) - 50,
