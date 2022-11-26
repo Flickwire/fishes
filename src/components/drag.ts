@@ -1,5 +1,4 @@
 import { Component, ComponentUpdateProps, Entity } from "../engine/entity"
-import { Vector2 } from "../engine/types/vector2"
 import { Velocity } from "./velocity";
 
 export class Drag extends Component {
@@ -16,11 +15,24 @@ export class Drag extends Component {
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {
     const velocity: Velocity = this.entity.getComponentOfType(Velocity)
+    const velocitySum = velocity.x + velocity.y
+    if (velocitySum == 0) {
+      return
+    }
     const dT = time - lastTime
     const mod = dT / 1000
-    const dX = mod * velocity.x
-    const dY = mod * velocity.y
-    this.entity.props.position.x += dX
-    this.entity.props.position.y += dY
+    const timeCorrectedMagnitude = mod * this.magnitude
+    const propX = velocity.x / velocitySum
+    const propY = velocity.y / velocitySum
+    var newX = velocity.x - (timeCorrectedMagnitude * propX)
+    var newY = velocity.y - (timeCorrectedMagnitude * propY)
+    if (newX > 0 && velocity.x < 0 || newX < 0 && velocity.x > 0) {
+      newX = 0
+    }
+    if (newY > 0 && velocity.y < 0 || newY < 0 && velocity.y > 0) {
+      newY = 0
+    }
+    velocity.x = newX
+    velocity.y = newY
   }
 }

@@ -18,6 +18,10 @@ export class Velocity extends Component {
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {
+    const velocitySum = this.x + this.y
+    if (velocitySum == 0) {
+      return
+    }
     const position: Position = this.entity.getComponentOfType(Position)
     const dT = time - lastTime
     const mod = dT / 1000

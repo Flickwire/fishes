@@ -5,16 +5,19 @@ import { Color } from "../components/color"
 import { Velocity } from "../components/velocity"
 import { Vector2 } from "../engine/types/vector2"
 import { Name } from "../components/name"
+import { Drag } from "../components/drag"
+import { World } from "../engine/world"
 
 export class Fish extends Entity {
-  constructor() {
-    super()
+  constructor(world: World) {
+    super(world)
     this
       .attachComponent(new Name(this, 'Fish'))
       .attachComponent(new Position(this, 50, 50))
       .attachComponent(new Color(this, 240, 100, 50, 255))
       .attachComponent(new Age(this))
-      .attachComponent(new Velocity(this, new Vector2(1, 3)))
+      .attachComponent(new Velocity(this, new Vector2(10, 30)))
+      .attachComponent(new Drag(this, 5))
   }
 
   draw(ctx: CanvasRenderingContext2D): void {

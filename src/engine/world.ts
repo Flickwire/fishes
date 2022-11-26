@@ -1,7 +1,7 @@
 import { Entity } from "./entity";
 
 export class World {
-  entities: Entity[]
+  entities: { [id: string]: Entity }
   drawableEntities: Entity[]
   lastUpdate: number
   canvas: HTMLCanvasElement
@@ -14,13 +14,13 @@ export class World {
     document.body.append(this.canvas)
     console.log("world exists")
     this.lastUpdate = window.performance.now()
-    this.entities = []
+    this.entities = {}
     this.drawableEntities = []
     this.run()
   }
   
   spawnEntity = (entity: Entity): void => {
-    this.entities.push(entity)
+    this.entities[entity.props.id] = entity
     if (typeof entity.draw === 'function') {
       this.drawableEntities.push(entity)
     }
@@ -28,9 +28,9 @@ export class World {
   
   update = (): void => {
     const time = window.performance.now()
-    this.entities.map((entity) => {
-      entity.update(this, time, this.lastUpdate)
-    })
+    Object.keys(this.entities).forEach(id => {
+      this.entities[id].update(time, this.lastUpdate)
+    });
     this.lastUpdate = time
     this.draw()
     setTimeout(this.update, 0)

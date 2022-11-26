@@ -24,12 +24,13 @@ export interface Entity {
 }
 
 export abstract class Entity {
-  name: string
   components: {[key: string]: Component}
   subscribedComponents: Component[]
   props: {[key: string]: any}
+  world: World
 
-  constructor() {
+  constructor(world: World) {
+    this.world = world
     this.props = {}
     this.components = {}
     this.subscribedComponents = []
@@ -61,7 +62,7 @@ export abstract class Entity {
     return false
   }
 
-  update(world: World, time: number, lastTime: number): void {
+  update(time: number, lastTime: number): void {
     const parameters: ComponentUpdateProps = {time, lastTime}
     this.subscribedComponents.forEach(component => {
       component.update(parameters)
