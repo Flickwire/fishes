@@ -4,7 +4,6 @@ import { Edible } from "./edible";
 import { Energy } from "./energy";
 import { Facing } from "./facing";
 import { Position } from "./position";
-import { Velocity } from "./velocity";
 
 /**
  * Will turn to face nearest source of food (Entity with Edible component)
@@ -40,10 +39,11 @@ export class SeeksFood extends Component {
     this.facing = this.entity.getComponentOfType(Facing)
   }
 
-  findNearestEdibleEntity(): Vector2 | null {
+  findNearestEdibleEntity(): { vector: Vector2, distance: number, entity: Entity } | null {
     const allEntities = this.entity.world.entities
     var closestEntityVector: Vector2 = null
     var closestDistance = Infinity
+    var closestEntity: Entity = null
     Object.keys(allEntities).forEach(id => {
       const entity = allEntities[id]
       if (entity.hasComponentOfType(Edible) && entity.hasComponentOfType(Position)) {
@@ -52,21 +52,32 @@ export class SeeksFood extends Component {
         if (magnitude < closestDistance) {
           closestDistance = magnitude
           closestEntityVector = pointing
+          closestEntity = entity
         }
       }
     });
-    return closestEntityVector
+    if (closestDistance === Infinity) {
+      return null
+    }
+    return { vector: closestEntityVector, distance: closestDistance, entity: closestEntity }
   }
 
   update = ({ time }: ComponentUpdateProps): void => {
     if (time >= this.nextApply) {
       const newTarget = this.findNearestEdibleEntity()
 
-      if (newTarget !== null) {
-        this.facing.vector = newTarget
+      if (newTarget !== null && newTarget.entity instanceof Entity) {
+        this.facing.vector = newTarget.vector
 
+        //If new target is close enough, eat it
         if (this.consumesEnergy) {
-          this.energy.energy -= 0.01
+          if (newTarget.distance <= 15) {
+            if (newTarget.entity.hasComponentOfType(Energy)) {
+              const newEnergy = newTarget.entity.getComponentOfType<Energy>(Energy)
+              this.energy.energy += newEnergy.energy
+              newEnergy.energy = 0
+            }
+          }
         }
       }
 

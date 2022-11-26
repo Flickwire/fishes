@@ -96,7 +96,7 @@ export class Fish extends Entity {
       drag: Math.max(0.1,Math.random()) * 10,
       impulseStrength: Math.max(Math.random(),0.1) * 10,
       impulseFrequency: Math.max(Math.random(),0.05) * 5,
-      seekFrequency: Math.max(Math.random() * 0.5, 0.1),
+      seekFrequency: Math.max(Math.random() * 0.2, 0.05),
       world: world,
       facing: new Vector2(
         (Math.random() * 2) - 1, 
