@@ -9,7 +9,6 @@ export class World {
 
   constructor () {
     this.canvas = document.createElement('canvas')
-    this.canvas.id = 'pond'
     this.renderContext = this.canvas.getContext('2d')
     document.body.append(this.canvas)
     console.log("world exists")
@@ -53,6 +52,8 @@ export class World {
       this.canvas.height = window.visualViewport.height
     }
     this.renderContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.renderContext.fillStyle = 'lightblue';
+    this.renderContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
     Object.keys(this.drawableEntities).forEach(id => {
       this.entities[id].draw(this.renderContext)
     })

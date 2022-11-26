@@ -86,9 +86,9 @@ export class Fish extends Entity {
         Math.random() * 255, 
         Math.random() * 255, 
         Math.random() * 255, 
-        (Math.random() * 155) + 100
+        Math.max(0.2,Math.random())
         ),
-      maxAge: Math.floor(Math.random() * 100)
+      maxAge: Math.floor(Math.random() * 10)
     }
     return new Fish(props)
   }
