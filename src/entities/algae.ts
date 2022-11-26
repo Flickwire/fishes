@@ -11,9 +11,8 @@ import {
   Velocity,
   Name,
   Drag,
-  Facing,
-  FacingAlignedImpulse,
-  Energy
+  Energy,
+  Edible
 } from "../components"
 
 export type AlgaeProps = {
@@ -39,12 +38,13 @@ export class Algae extends Entity {
     this
       .attachComponent(new Name(this, 'Algae'))
       .attachComponent(new Energy(this, props.initialEnergy))
-      .attachComponent(new Position(this, props.position.x, props.position.y))
+      .attachComponent(new Position(this, props.position))
       .attachComponent(new Color(this, props.color.x, props.color.y, props.color.z, props.color.a))
       .attachComponent(new Age(this))
       .attachComponent(new Velocity(this, props.velocity))
       .attachComponent(new Drag(this, props.drag))
       .attachComponent(new MaxAge(this, props.maxAge))
+      .attachComponent(new Edible(this))
 
     this.color = this.getComponentOfType(Color)
     this.position = this.getComponentOfType(Position)
@@ -54,16 +54,16 @@ export class Algae extends Entity {
   draw(ctx: CanvasRenderingContext2D): void {
     const radius = this.energy.energy / 25
     if (
-      this.position.x < -1 * radius ||
-      this.position.x > (ctx.canvas.width + radius) ||
-      this.position.y < -1 * radius ||
-      this.position.y > (ctx.canvas.height + radius)
+      this.position.vector.x < -1 * radius ||
+      this.position.vector.x > (ctx.canvas.width + radius) ||
+      this.position.vector.y < -1 * radius ||
+      this.position.vector.y > (ctx.canvas.height + radius)
     ) {
       return
     }
     ctx.fillStyle = this.color.toRGBA()
     ctx.beginPath()
-    ctx.arc(this.position.x, this.position.y, radius, 0, 2 * Math.PI, false)
+    ctx.arc(this.position.vector.x, this.position.vector.y, radius, 0, 2 * Math.PI, false)
     ctx.fill()
   }
 

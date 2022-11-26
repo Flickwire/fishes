@@ -13,7 +13,8 @@ import {
   Drag,
   Facing,
   FacingAlignedImpulse,
-  Energy
+  Energy,
+  SeeksFood
 } from "../components"
 
 export type FishProps = {
@@ -25,7 +26,8 @@ export type FishProps = {
   drag: number
   impulseStrength: number
   impulseFrequency: number
-  maxAge: number,
+  seekFrequency: number
+  maxAge: number
   initialEnergy: number
 }
 
@@ -43,7 +45,7 @@ export class Fish extends Entity {
     this
       .attachComponent(new Name(this, 'Fish'))
       .attachComponent(new Energy(this, props.initialEnergy))
-      .attachComponent(new Position(this, props.position.x, props.position.y))
+      .attachComponent(new Position(this, props.position))
       .attachComponent(new Facing(this, props.facing))
       .attachComponent(new Color(this, props.color.x, props.color.y, props.color.z, props.color.a))
       .attachComponent(new Age(this))
@@ -51,6 +53,7 @@ export class Fish extends Entity {
       .attachComponent(new Drag(this, props.drag))
       .attachComponent(new FacingAlignedImpulse(this, props.impulseStrength, props.impulseFrequency))
       .attachComponent(new MaxAge(this, props.maxAge))
+      .attachComponent(new SeeksFood(this, props.seekFrequency))
 
     this.color = this.getComponentOfType(Color)
     this.position = this.getComponentOfType(Position)
@@ -60,19 +63,19 @@ export class Fish extends Entity {
 
   draw(ctx: CanvasRenderingContext2D): void {
     if (
-      this.position.x < -10 ||
-      this.position.x > (ctx.canvas.width + 10) ||
-      this.position.y < -10 ||
-      this.position.y > (ctx.canvas.height + 10)
+      this.position.vector.x < -10 ||
+      this.position.vector.x > (ctx.canvas.width + 10) ||
+      this.position.vector.y < -10 ||
+      this.position.vector.y > (ctx.canvas.height + 10)
     ) {
       return
     }
     this.color.a = Math.min(this.energy.energy, 50) / 50
     const facingNormal = this.facing.vector.normalise()
-    const eyesPos = new Vector2(this.position.x + (9 * facingNormal.x), this.position.y + (9 * facingNormal.y))
+    const eyesPos = new Vector2(this.position.vector.x + (9 * facingNormal.x), this.position.vector.y + (9 * facingNormal.y))
     ctx.fillStyle = this.color.toRGBA()
     ctx.beginPath()
-    ctx.arc(this.position.x, this.position.y, 15, 0, 2 * Math.PI, false)
+    ctx.arc(this.position.vector.x, this.position.vector.y, 15, 0, 2 * Math.PI, false)
     ctx.fill()
     ctx.fillStyle = `rgba(0,0,0,${this.color.a})`
     ctx.beginPath()
@@ -93,6 +96,7 @@ export class Fish extends Entity {
       drag: Math.max(0.1,Math.random()) * 10,
       impulseStrength: Math.max(Math.random(),0.1) * 10,
       impulseFrequency: Math.max(Math.random(),0.05) * 5,
+      seekFrequency: Math.max(Math.random() * 0.5, 0.1),
       world: world,
       facing: new Vector2(
         (Math.random() * 2) - 1, 

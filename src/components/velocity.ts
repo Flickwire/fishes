@@ -25,7 +25,7 @@ export class Velocity extends Component {
     const mod = dT / 1000
     const dX = mod * this.vector.x
     const dY = mod * this.vector.y
-    this.position.x += dX
-    this.position.y += dY
+    this.position.vector.x += dX
+    this.position.vector.y += dY
   }
 }

@@ -1,5 +1,6 @@
 import { Name, Position } from "../components";
 import { Component, ComponentUpdateProps, Entity } from "../engine/entity";
+import { Vector2 } from "../engine/types/vector2";
 import { World } from "../engine/world";
 
 class MeasureFPS extends Component {
@@ -35,7 +36,7 @@ export class FpsCounter extends Entity {
     super(world)
     this
       .attachComponent(new Name(this, 'FPS Counter'))
-      .attachComponent(new Position(this, 10, 30))
+      .attachComponent(new Position(this, new Vector2(10, 30)))
       .attachComponent(new MeasureFPS(this))
     
     this.position = this.getComponentOfType(Position)
@@ -45,6 +46,6 @@ export class FpsCounter extends Entity {
   draw(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = 'black'
     ctx.font = '24px sans-serif'
-    ctx.fillText(`F: ${this.measurement.fps}`, this.position.x, this.position.y)
+    ctx.fillText(`F: ${this.measurement.fps}`, this.position.vector.x, this.position.vector.y)
   }
 }
