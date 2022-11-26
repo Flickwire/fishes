@@ -17,9 +17,9 @@ export class Fish extends Entity {
       .attachComponent(new Position(this, 50, 50))
       .attachComponent(new Color(this, 240, 100, 50, 255))
       .attachComponent(new Age(this))
-      .attachComponent(new Velocity(this, new Vector2(40, 50)))
-      .attachComponent(new Drag(this, 15))
-      .attachComponent(new MomentumAlignedImpulse(this, 45, 3))
+      .attachComponent(new Velocity(this, new Vector2(90, 110)))
+      .attachComponent(new Drag(this, 35))
+      .attachComponent(new MomentumAlignedImpulse(this, (35 * 1.5), 1.5))
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
