@@ -6,7 +6,7 @@ import { FpsCounter } from './entities/fpsCounter'
 
 const run = (): void => {
   const world = new World()
-  world.spawnEntity(new Fish(world))
+  world.spawnEntity(Fish.generate(world))
   world.spawnEntity(new FpsCounter(world));
   (<any>window).world = world
 }

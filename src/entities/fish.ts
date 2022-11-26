@@ -12,19 +12,31 @@ import {
   Facing,
   FacingAlignedImpulse
 } from "../components"
+import { Vector4 } from "../engine/types/vector4"
+
+export type FishProps = {
+  world: World
+  position: Vector2
+  facing: Vector2
+  color: Vector4
+  velocity: Vector2
+  drag: number
+  impulseStrength: number
+  impulseFrequency: number
+}
 
 export class Fish extends Entity {
-  constructor(world: World) {
-    super(world)
+  constructor(props: FishProps) {
+    super(props.world)
     this
       .attachComponent(new Name(this, 'Fish'))
-      .attachComponent(new Position(this, 400, 400))
-      .attachComponent(new Facing(this, new Vector2(4,1)))
-      .attachComponent(new Color(this, 240, 100, 50, 255))
+      .attachComponent(new Position(this, props.position.x, props.position.y))
+      .attachComponent(new Facing(this, props.facing))
+      .attachComponent(new Color(this, props.color.x, props.color.y, props.color.y, props.color.a))
       .attachComponent(new Age(this))
-      .attachComponent(new Velocity(this, new Vector2(-100, 60)))
-      .attachComponent(new Drag(this, 35))
-      .attachComponent(new FacingAlignedImpulse(this, (35 * 1.5), 1.5))
+      .attachComponent(new Velocity(this, props.velocity))
+      .attachComponent(new Drag(this, props.drag))
+      .attachComponent(new FacingAlignedImpulse(this, props.impulseStrength, props.impulseFrequency))
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
@@ -34,5 +46,33 @@ export class Fish extends Entity {
     ctx.beginPath()
     ctx.arc(position.x, position.y, 10, 0, 2 * Math.PI, false)
     ctx.fill()
+  }
+
+  static generate(world: World): Fish {
+    const props = {
+      position: new Vector2(
+        Math.random() * world.canvas.width, 
+        Math.random() * world.canvas.height
+        ),
+      velocity: new Vector2(
+        (Math.random() * 100) - 50, 
+        (Math.random() * 100) - 50
+        ),
+      drag: Math.random() * 50,
+      impulseStrength: (Math.random() * 100) - 50,
+      impulseFrequency: (Math.random() * 10) + 0.1,
+      world: world,
+      facing: new Vector2(
+        (Math.random() * 2) - 1, 
+        (Math.random() * 2) - 1
+        ),
+      color: new Vector4(
+        Math.random() * 255, 
+        Math.random() * 255, 
+        Math.random() * 255, 
+        (Math.random() * 155) + 100
+        )
+    }
+    return new Fish(props)
   }
 }
