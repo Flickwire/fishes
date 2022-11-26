@@ -1,9 +1,13 @@
-import { Entity, Component } from "../engine/entity";
-import { Vector2 } from "../engine/types/vector2";
+import { Entity, Component } from "../engine/entity"
 
 export class Position extends Component {
+
+  x: number
+  y: number
+
   constructor(entity: Entity, x = 0, y = 0) {
     super(entity)
-    entity.props.position = new Vector2(x, y)
+    this.x = x
+    this.y = y
   }
 }

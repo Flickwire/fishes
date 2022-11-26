@@ -18,11 +18,11 @@ export class Fish extends Entity {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    const color = this.props.color
-    const colStr = `rgba(${color.x}, ${color.y}, ${color.z}, ${color.a})`
-    ctx.fillStyle = colStr
+    const color: Color = this.getComponentOfType(Color)
+    const position: Position = this.getComponentOfType(Position)
+    ctx.fillStyle = color.toRGBA()
     ctx.beginPath()
-    ctx.arc(this.props.position.x, this.props.position.y, 10, 0, 2 * Math.PI, false)
+    ctx.arc(position.x, position.y, 10, 0, 2 * Math.PI, false)
     ctx.fill()
   }
 }

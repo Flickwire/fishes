@@ -6,10 +6,11 @@ import { Vector2 } from "../engine/types/vector2";
 class MeasureFPS extends Component {
 
   frameTimes: number[]
+  fps: number
 
   constructor(entity: Entity) {
     super(entity)
-    entity.props.fps = 0
+    this.fps = 0
     this.frameTimes = []
   }
 
@@ -18,7 +19,11 @@ class MeasureFPS extends Component {
       this.frameTimes.shift()
     }
     this.frameTimes.push(time - lastTime)
-    this.entity.props.fps = Math.floor(1000/(this.frameTimes.reduce((a, b) => a + b, 0) / this.frameTimes.length))
+    this.fps = Math.floor(1000/(this.frameTimes.reduce((a, b) => a + b, 0) / this.frameTimes.length))
+  }
+
+  getFPS(): number {
+    return this.fps
   }
 }
 
@@ -34,7 +39,8 @@ export class FpsCounter extends Entity {
   draw(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = 'black'
     ctx.font = '24px sans-serif'
-    const position: Vector2 = this.props.position
-    ctx.fillText(`${Math.floor(this.getProp('fps', 0))}`, position.x, position.y)
+    const position: Position = this.getComponentOfType(Position)
+    const measurement: MeasureFPS = this.getComponentOfType(MeasureFPS)
+    ctx.fillText(`${measurement.getFPS()}`, position.x, position.y)
   }
 }

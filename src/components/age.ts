@@ -7,14 +7,14 @@ export class Age extends Component {
 
   constructor(entity: Entity) {
     super(entity)
-    entity.props.birthday = window.performance.now()
-    entity.props.age = 0
+    this.birthday = window.performance.now()
+    this.age = 0
   }
 
   update = ({ time }: ComponentUpdateProps): void => {
-    if (time - this.entity.props.birthday > 1000) {
-      this.entity.props.age += 1
-      this.entity.props.birthday = time
+    if (time - this.birthday > 1000) {
+      this.age += 1
+      this.birthday = time
     }
   }
 }
