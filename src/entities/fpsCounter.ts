@@ -27,19 +27,24 @@ class MeasureFPS extends Component {
 }
 
 export class FpsCounter extends Entity {
+
+  measurement: MeasureFPS
+  position: Position
+
   constructor(world: World) {
     super(world)
     this
       .attachComponent(new Name(this, 'FPS Counter'))
       .attachComponent(new Position(this, 10, 30))
       .attachComponent(new MeasureFPS(this))
+    
+    this.position = this.getComponentOfType(Position)
+    this.measurement = this.getComponentOfType(MeasureFPS)
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = 'black'
     ctx.font = '24px sans-serif'
-    const position: Position = this.getComponentOfType(Position)
-    const measurement: MeasureFPS = this.getComponentOfType(MeasureFPS)
-    ctx.fillText(`${measurement.getFPS()}`, position.x, position.y)
+    ctx.fillText(`F: ${this.measurement.fps}`, this.position.x, this.position.y)
   }
 }

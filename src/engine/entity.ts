@@ -35,7 +35,7 @@ export abstract class Entity {
     this.components = {}
     this.subscribedComponents = []
     this.props.id = uuidv4();
-    console.log(`Spawned entity ${this.props.id} @ ${window.performance.now()}`)
+    //console.log(`Spawned entity ${this.props.id} @ ${window.performance.now()}`)
   }
 
   attachComponent(component: Component): Entity {
