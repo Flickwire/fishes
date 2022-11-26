@@ -1,4 +1,5 @@
 import { World } from "./world";
+import {v4 as uuidv4} from "uuid";
 
 export type ComponentUpdateProps = {
   time: number,
@@ -28,12 +29,12 @@ export abstract class Entity {
   subscribedComponents: Component[]
   props: {[key: string]: any}
 
-  constructor(name: string) {
+  constructor() {
     this.props = {}
-    this.props.name = name
     this.components = {}
     this.subscribedComponents = []
-    console.log(`Spawned entity ${this.props.name}`)
+    this.props.id = uuidv4();
+    console.log(`Spawned entity ${this.props.id} @ ${window.performance.now()}`)
   }
 
   attachComponent(component: Component): Entity {

@@ -8,7 +8,7 @@ import { Name } from "../components/name"
 
 export class Fish extends Entity {
   constructor() {
-    super('Fish')
+    super()
     this
       .attachComponent(new Name(this, 'Fish'))
       .attachComponent(new Position(this, 50, 50))

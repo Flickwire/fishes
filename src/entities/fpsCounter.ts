@@ -1,3 +1,4 @@
+import { Name } from "../components/name";
 import { Position } from "../components/position";
 import { Component, ComponentUpdateProps, Entity } from "../engine/entity";
 import { Vector2 } from "../engine/types/vector2";
@@ -23,8 +24,10 @@ class MeasureFPS extends Component {
 
 export class FpsCounter extends Entity {
   constructor() {
-    super('FPSCounter')
-    this.attachComponent(new Position(this, 10, 30))
+    super()
+    this
+      .attachComponent(new Name(this, 'FPS Counter'))
+      .attachComponent(new Position(this, 10, 30))
       .attachComponent(new MeasureFPS(this))
   }
 
