@@ -34,9 +34,11 @@ export class Fish extends Entity {
   position: Position
   color: Color
   facing: Facing
+  initialProps: {[key: string]: any}
 
   constructor(props: FishProps) {
     super(props.world)
+    this.initialProps = props
     this
       .attachComponent(new Name(this, 'Fish'))
       .attachComponent(new Energy(this, props.initialEnergy))
@@ -85,9 +87,9 @@ export class Fish extends Entity {
         Math.random() - 0.5, 
         Math.random() - 0.5
         ),
-      drag: Math.random() * 20,
-      impulseStrength: Math.max(Math.random(),0.1) * 30,
-      impulseFrequency: Math.max((Math.random() * 5), 0.1),
+      drag: Math.max(0.1,Math.random()) * 10,
+      impulseStrength: Math.max(Math.random(),0.1) * 10,
+      impulseFrequency: Math.max(Math.random(),0.05) * 5,
       world: world,
       facing: new Vector2(
         (Math.random() * 2) - 1, 

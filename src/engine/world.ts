@@ -26,6 +26,9 @@ export class World {
   }
 
   deleteEntity = (entity: Entity): void => {
+    if (typeof (<any>entity)?.cleanup === 'function') {
+      (<any>entity)?.cleanup()
+    }
     if (typeof this.entities[entity.props.id] !== 'undefined') {
       delete(this.entities[entity.props.id])
     }

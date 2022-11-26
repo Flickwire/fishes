@@ -33,7 +33,7 @@ export class FacingAlignedImpulse extends Component {
     }
     this.magnitude = magnitude
     this.frequency = frequency * 1000
-    this.lastApplied = 0
+    this.lastApplied = window.performance.now()
     this.nextApply = this.lastApplied + this.frequency
     this.velocity = this.entity.getComponentOfType(Velocity)
     this.facing = this.entity.getComponentOfType(Facing)

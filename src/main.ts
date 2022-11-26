@@ -7,7 +7,7 @@ import { EntityCounter } from './entities/entityCounter'
 
 const run = (): void => {
   const world = new World()
-  world.spawnEntity(new FishSpawner(world, 5))
+  world.spawnEntity(new FishSpawner(world, 50))
   world.spawnEntity(new EntityCounter(world))
   world.spawnEntity(new FpsCounter(world));
   (<any>window).world = world
