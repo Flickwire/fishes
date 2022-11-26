@@ -34,6 +34,7 @@ export class Fish extends Entity {
   position: Position
   color: Color
   facing: Facing
+  energy: Energy
   initialProps: {[key: string]: any}
 
   constructor(props: FishProps) {
@@ -54,6 +55,7 @@ export class Fish extends Entity {
     this.color = this.getComponentOfType(Color)
     this.position = this.getComponentOfType(Position)
     this.facing = this.getComponentOfType(Facing)
+    this.energy = this.getComponentOfType(Energy)
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
@@ -65,15 +67,16 @@ export class Fish extends Entity {
     ) {
       return
     }
+    this.color.a = Math.min(this.energy.energy, 50) / 50
     const facingNormal = this.facing.vector.normalise()
-    const eyesPos = new Vector2(this.position.x + (5 * facingNormal.x), this.position.y + (5 * facingNormal.y))
+    const eyesPos = new Vector2(this.position.x + (9 * facingNormal.x), this.position.y + (9 * facingNormal.y))
     ctx.fillStyle = this.color.toRGBA()
     ctx.beginPath()
-    ctx.arc(this.position.x, this.position.y, 10, 0, 2 * Math.PI, false)
+    ctx.arc(this.position.x, this.position.y, 15, 0, 2 * Math.PI, false)
     ctx.fill()
     ctx.fillStyle = `rgba(0,0,0,${this.color.a})`
     ctx.beginPath()
-    ctx.arc(eyesPos.x, eyesPos.y, 1.5, 0, 2 * Math.PI, false)
+    ctx.arc(eyesPos.x, eyesPos.y, 2, 0, 2 * Math.PI, false)
     ctx.fill()
   }
 
