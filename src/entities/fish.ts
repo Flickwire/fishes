@@ -12,7 +12,8 @@ import {
   Name,
   Drag,
   Facing,
-  FacingAlignedImpulse
+  FacingAlignedImpulse,
+  Energy
 } from "../components"
 
 export type FishProps = {
@@ -24,7 +25,8 @@ export type FishProps = {
   drag: number
   impulseStrength: number
   impulseFrequency: number
-  maxAge: number
+  maxAge: number,
+  initialEnergy: number
 }
 
 export class Fish extends Entity {
@@ -36,9 +38,10 @@ export class Fish extends Entity {
     super(props.world)
     this
       .attachComponent(new Name(this, 'Fish'))
+      .attachComponent(new Energy(this, props.initialEnergy))
       .attachComponent(new Position(this, props.position.x, props.position.y))
       .attachComponent(new Facing(this, props.facing))
-      .attachComponent(new Color(this, props.color.x, props.color.y, props.color.y, props.color.a))
+      .attachComponent(new Color(this, props.color.x, props.color.y, props.color.z, props.color.a))
       .attachComponent(new Age(this))
       .attachComponent(new Velocity(this, props.velocity))
       .attachComponent(new Drag(this, props.drag))
@@ -75,20 +78,21 @@ export class Fish extends Entity {
         Math.random() - 0.5
         ),
       drag: Math.random() * 50,
-      impulseStrength: (Math.random() * 100) - 50,
-      impulseFrequency: (Math.random() * 10) + 0.1,
+      impulseStrength: (Math.max(Math.random(), 0.5) * 100) - 50,
+      impulseFrequency: Math.max((Math.random() * 5), 0.1),
       world: world,
       facing: new Vector2(
         (Math.random() * 2) - 1, 
         (Math.random() * 2) - 1
         ),
       color: new Vector4(
-        Math.random() * 255, 
-        Math.random() * 255, 
-        Math.random() * 255, 
-        Math.max(0.2,Math.random())
+        (Math.random() * 40) + 200, 
+        (Math.random() * 150) + 55, 
+        Math.random() * 100, 
+        Math.max(0.5,Math.random())
         ),
-      maxAge: Math.floor(Math.random() * 10)
+      maxAge: Math.floor(Math.max(0.02,Math.random()) * 60),
+      initialEnergy: Math.max(0.1,(Math.random() * 100))
     }
     return new Fish(props)
   }
