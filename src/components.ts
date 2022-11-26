@@ -1,4 +1,5 @@
 export { Age } from "./components/age"
+export { MaxAge } from "./components/maxAge"
 export { Position } from "./components/position"
 export { Color } from "./components/color"
 export { Velocity } from "./components/velocity"

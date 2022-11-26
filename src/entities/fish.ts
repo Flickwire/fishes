@@ -1,9 +1,11 @@
 import { Entity } from "../engine/entity"
 import { Vector2 } from "../engine/types/vector2"
+import { Vector4 } from "../engine/types/vector4"
 import { World } from "../engine/world"
 
 import {
   Age,
+  MaxAge,
   Position,
   Color,
   Velocity,
@@ -12,7 +14,6 @@ import {
   Facing,
   FacingAlignedImpulse
 } from "../components"
-import { Vector4 } from "../engine/types/vector4"
 
 export type FishProps = {
   world: World
@@ -23,6 +24,7 @@ export type FishProps = {
   drag: number
   impulseStrength: number
   impulseFrequency: number
+  maxAge: number
 }
 
 export class Fish extends Entity {
@@ -37,6 +39,7 @@ export class Fish extends Entity {
       .attachComponent(new Velocity(this, props.velocity))
       .attachComponent(new Drag(this, props.drag))
       .attachComponent(new FacingAlignedImpulse(this, props.impulseStrength, props.impulseFrequency))
+      .attachComponent(new MaxAge(this, props.maxAge))
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
@@ -71,7 +74,8 @@ export class Fish extends Entity {
         Math.random() * 255, 
         Math.random() * 255, 
         (Math.random() * 155) + 100
-        )
+        ),
+      maxAge: Math.floor(Math.random() * 100)
     }
     return new Fish(props)
   }

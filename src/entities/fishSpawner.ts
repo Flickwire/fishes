@@ -1,4 +1,4 @@
-import { Name, Position } from "../components";
+import { Name } from "../components";
 import { Component, ComponentUpdateProps, Entity } from "../engine/entity";
 import { World } from "../engine/world";
 import { Fish } from "./fish";

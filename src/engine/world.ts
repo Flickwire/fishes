@@ -2,7 +2,7 @@ import { Entity } from "./entity";
 
 export class World {
   entities: { [id: string]: Entity }
-  drawableEntities: Entity[]
+  drawableEntities: { [id: string]: Entity }
   lastUpdate: number
   canvas: HTMLCanvasElement
   renderContext: CanvasRenderingContext2D
@@ -15,14 +15,23 @@ export class World {
     console.log("world exists")
     this.lastUpdate = window.performance.now()
     this.entities = {}
-    this.drawableEntities = []
+    this.drawableEntities = {}
     this.run()
   }
   
   spawnEntity = (entity: Entity): void => {
     this.entities[entity.props.id] = entity
     if (typeof entity.draw === 'function') {
-      this.drawableEntities.push(entity)
+      this.drawableEntities[entity.props.id] = entity
+    }
+  }
+
+  deleteEntity = (entity: Entity): void => {
+    if (typeof this.entities[entity.props.id] !== 'undefined') {
+      delete(this.entities[entity.props.id])
+    }
+    if (typeof this.drawableEntities[entity.props.id] !== 'undefined') {
+      delete(this.drawableEntities[entity.props.id])
     }
   }
   
@@ -44,8 +53,8 @@ export class World {
       this.canvas.height = window.visualViewport.height
     }
     this.renderContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawableEntities.map((entity) => {
-      entity.draw(this.renderContext)
+    Object.keys(this.drawableEntities).forEach(id => {
+      this.entities[id].draw(this.renderContext)
     })
   }
 
