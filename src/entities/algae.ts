@@ -85,7 +85,7 @@ export class Algae extends Entity {
         Math.random() * 150, 
         Math.max(0.3,Math.random())
         ),
-      maxAge: Math.max(2,Math.floor(Math.max(0.02,Math.random()) * 30)),
+      maxAge: Math.max(30,Math.floor(Math.random() * 120)),
       initialEnergy: Math.max(5,(Math.random() * 25))
     }
     return new Algae(props)
