@@ -12,7 +12,8 @@ import {
   Name,
   Drag,
   Energy,
-  Edible
+  Edible,
+  Photosynthesis
 } from "../components"
 
 export type AlgaeProps = {
@@ -22,7 +23,8 @@ export type AlgaeProps = {
   velocity: Vector2
   drag: number
   maxAge: number,
-  initialEnergy: number
+  initialEnergy: number,
+  photosynthesisRate: number
 }
 
 export class Algae extends Entity {
@@ -45,6 +47,7 @@ export class Algae extends Entity {
       .attachComponent(new Drag(this, props.drag))
       .attachComponent(new MaxAge(this, props.maxAge))
       .attachComponent(new Edible(this))
+      .attachComponent(new Photosynthesis(this, props.photosynthesisRate))
 
     this.color = this.getComponentOfType(Color)
     this.position = this.getComponentOfType(Position)
@@ -86,7 +89,8 @@ export class Algae extends Entity {
         Math.max(0.3,Math.random())
         ),
       maxAge: Math.max(30,Math.floor(Math.random() * 120)),
-      initialEnergy: Math.max(5,(Math.random() * 25))
+      initialEnergy: Math.max(5,(Math.random() * 25)),
+      photosynthesisRate: Math.max(0.1,(Math.random() * 2))
     }
     return new Algae(props)
   }
