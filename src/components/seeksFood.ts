@@ -46,7 +46,7 @@ export class SeeksFood extends Component {
     var closestEntity: Entity = null
     Object.keys(allEntities).forEach(id => {
       const entity = allEntities[id]
-      if (entity.hasComponentOfType(Edible) && entity.hasComponentOfType(Position)) {
+      if (entity.hasComponentOfType(Edible) && entity.hasComponentOfType(Position) && entity.props.id !== this.entity.props.id) {
         const pointing = this.position.vector.vectorTo(entity.getComponentOfType<Position>(Position).vector)
         const magnitude = pointing.magnitude()
         if (magnitude < closestDistance) {
