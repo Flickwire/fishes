@@ -67,7 +67,8 @@ export class SeeksFood extends Component {
       const newTarget = this.findNearestEdibleEntity()
 
       if (newTarget !== null && newTarget.entity instanceof Entity) {
-        this.facing.vector = newTarget.vector
+        const newFacing = new Vector2((this.facing.vector.x * 50) + (newTarget.vector.x), (this.facing.vector.y * 50) + (newTarget.vector.y)).normalise()
+        this.facing.vector = newFacing
 
         //If new target is close enough, eat it
         if (this.consumesEnergy) {
