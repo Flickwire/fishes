@@ -52,7 +52,7 @@ export class Algae extends Entity {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    const radius = this.energy.energy / 25
+    const radius = this.energy.energy
     if (
       this.position.vector.x < -1 * radius ||
       this.position.vector.x > (ctx.canvas.width + radius) ||
@@ -86,7 +86,7 @@ export class Algae extends Entity {
         Math.max(0.3,Math.random())
         ),
       maxAge: Math.max(2,Math.floor(Math.max(0.02,Math.random()) * 30)),
-      initialEnergy: Math.max(100,(Math.random() * 500))
+      initialEnergy: Math.max(5,(Math.random() * 25))
     }
     return new Algae(props)
   }
