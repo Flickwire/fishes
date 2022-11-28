@@ -3,6 +3,7 @@ import { Vector2 } from "../engine/types/vector2";
 import { Edible } from "./edible";
 import { Energy } from "./energy";
 import { Facing } from "./facing";
+import { Hunting } from "./hunting";
 import { Position } from "./position";
 
 /**
@@ -64,26 +65,15 @@ export class SeeksFood extends Component {
 
   update = ({ time }: ComponentUpdateProps): void => {
     if (time >= this.nextApply) {
-      const newTarget = this.findNearestEdibleEntity()
-
-      if (newTarget !== null && newTarget.entity instanceof Entity) {
-        const newFacing = new Vector2((this.facing.vector.x * 50) + (newTarget.vector.x), (this.facing.vector.y * 50) + (newTarget.vector.y)).normalise()
-        this.facing.vector = newFacing
-
-        //If new target is close enough, eat it
-        if (this.consumesEnergy) {
-          if (newTarget.distance <= 15) {
-            if (newTarget.entity.hasComponentOfType(Energy)) {
-              const newEnergy = newTarget.entity.getComponentOfType<Energy>(Energy)
-              this.energy.energy += newEnergy.energy
-              newEnergy.energy = 0
-            }
-          }
-        }
-      }
-
       this.lastApplied = time
       this.nextApply += this.frequency
+      if (this.entity.hasComponentOfType(Hunting)) {
+        return
+      }
+      const newTarget = this.findNearestEdibleEntity()
+      if (newTarget !== null) {
+        this.entity.attachComponent(new Hunting(this.entity, newTarget.entity))
+      }
     }
   }
 }
