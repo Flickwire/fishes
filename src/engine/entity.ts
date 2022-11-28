@@ -46,6 +46,16 @@ export abstract class Entity {
     return this
   }
 
+  detachComponent(component: Component): Entity {
+    delete(this.components[component.constructor.name])
+    this.subscribedComponents.forEach((subscribedComponent, i) => {
+      if (subscribedComponent.constructor.name === component.constructor.name) {
+        delete(this.subscribedComponents[i])
+      }
+    });
+    return this;
+  }
+
   getComponentOfType<T>(type: typeof Component): T | null {
     const typeName = type.name
     if (typeof this.components[typeName] !== 'undefined' && this.components[typeName] instanceof type) {
