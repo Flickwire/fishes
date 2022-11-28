@@ -55,7 +55,7 @@ export class Fish extends Entity {
       .attachComponent(new FacingAlignedImpulse(this, props.impulseStrength, props.impulseFrequency))
       .attachComponent(new MaxAge(this, props.maxAge))
       .attachComponent(new SeeksFood(this, props.seekFrequency))
-      .attachComponent(new Edible(this))
+      //.attachComponent(new Edible(this))
 
     this.color = this.getComponentOfType(Color)
     this.position = this.getComponentOfType(Position)
