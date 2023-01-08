@@ -3,15 +3,15 @@ import { Velocity } from "./velocity";
 
 export class Drag extends Component {
 
-  magnitude: number
+  dragFactor: number
   velocity: Velocity
 
-  constructor(entity: Entity, magnitude: number = 0) {
+  constructor(entity: Entity, dragFactor = 1) {
     super(entity)
     if (!entity.hasComponentOfType(Velocity)) {
       throw new Error('Please add velocity component before drag component');
     }
-    this.magnitude = magnitude
+    this.dragFactor = dragFactor
     this.velocity = this.entity.getComponentOfType(Velocity)
   }
 
@@ -19,18 +19,15 @@ export class Drag extends Component {
     if (this.velocity.vector.x === 0 && this.velocity.vector.y === 0) {
       return
     }
-    const normal = this.velocity.vector.normalise()
     const dT = time - lastTime
-    const mod = dT / 1000
-    const timeCorrectedMagnitude = mod * this.magnitude
-    var newX = this.velocity.vector.x - (timeCorrectedMagnitude * normal.x)
-    var newY = this.velocity.vector.y - (timeCorrectedMagnitude * normal.y)
-    if (newX > 0 && this.velocity.vector.x < 0 || newX < 0 && this.velocity.vector.x > 0) {
-      newX = 0
-    }
-    if (newY > 0 && this.velocity.vector.y < 0 || newY < 0 && this.velocity.vector.y > 0) {
-      newY = 0
-    }
+    const mod = dT / 100
+    //Target for velocity in 1 second: 1/dragFactor * current velocity
+    const targetVelX = this.velocity.vector.x / this.dragFactor
+    const targetVelY = this.velocity.vector.y / this.dragFactor
+    const diffX = targetVelX - this.velocity.vector.x
+    const diffY = targetVelY - this.velocity.vector.y
+    const newX = this.velocity.vector.x + (diffX * mod)
+    const newY = this.velocity.vector.y + (diffY * mod)
     this.velocity.vector.x = newX
     this.velocity.vector.y = newY
   }

@@ -50,7 +50,7 @@ export class FacingAlignedImpulse extends Component {
       this.velocity.vector.y += normal.y * this.magnitude
 
       if (this.consumesEnergy) {
-        this.energy.energy -= this.magnitude
+        this.energy.energy -= (this.magnitude/10)
       }
 
       this.lastApplied = time

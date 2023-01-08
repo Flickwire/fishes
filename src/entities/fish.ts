@@ -14,8 +14,7 @@ import {
   Facing,
   FacingAlignedImpulse,
   Energy,
-  SeeksFood,
-  Edible
+  SeeksFood
 } from "../components"
 
 export type FishProps = {
@@ -55,7 +54,6 @@ export class Fish extends Entity {
       .attachComponent(new FacingAlignedImpulse(this, props.impulseStrength, props.impulseFrequency))
       .attachComponent(new MaxAge(this, props.maxAge))
       .attachComponent(new SeeksFood(this, props.seekFrequency))
-      //.attachComponent(new Edible(this))
 
     this.color = this.getComponentOfType(Color)
     this.position = this.getComponentOfType(Position)
@@ -90,26 +88,26 @@ export class Fish extends Entity {
       position: new Vector2(
         Math.random() * world.canvas.width, 
         Math.random() * world.canvas.height
-        ),
+      ),
       velocity: new Vector2(
         Math.random() - 0.5, 
         Math.random() - 0.5
-        ),
-      drag: Math.max(0.1,Math.random()) * 10,
-      impulseStrength: Math.max(Math.random(),0.1) * 10,
-      impulseFrequency: Math.max(Math.random(),0.05) * 5,
+      ),
+      drag: 1.05,
+      impulseStrength: Math.max(Math.random(),0.2) * 40,
+      impulseFrequency: Math.max(Math.random(),0.01) * 2.5,
       seekFrequency: Math.max(Math.random() * 0.2, 0.05),
       world: world,
       facing: new Vector2(
         (Math.random() * 2) - 1, 
         (Math.random() * 2) - 1
-        ),
+      ),
       color: new Vector4(
         (Math.random() * 40) + 200, 
         (Math.random() * 150) + 55, 
         Math.random() * 100, 
         Math.max(0.5,Math.random())
-        ),
+      ),
       maxAge: Math.floor(Math.max(0.02,Math.random()) * 6000),
       initialEnergy: Math.max(50,(Math.random() * 200))
     }

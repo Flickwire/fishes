@@ -11,9 +11,6 @@ rules:
   no-use-before-define: off
   "@typescript-eslint/no-use-before-define":
     - error
-  complexity:
-    - error
-    - 10
   no-await-in-loop: warn
   no-eval: error
   no-implied-eval: error
