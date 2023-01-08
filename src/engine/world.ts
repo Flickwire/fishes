@@ -57,7 +57,7 @@ export class World {
     this.renderContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.renderContext.fillStyle = 'lightblue';
     this.renderContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    Object.keys(this.drawableEntities).forEach(id => {
+    Object.keys(this.drawableEntities).reverse().forEach(id => {
       this.entities[id].draw(this.renderContext)
     })
   }
