@@ -28,10 +28,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@types/uuid", "npm:8.3.4"],\
+            ["@types/uuid", "npm:9.0.7"],\
             ["prettier", "npm:3.1.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"],\
-            ["uuid", "npm:9.0.0"],\
+            ["uuid", "npm:9.0.1"],\
             ["vite", "virtual:e1da758ff74e234d0ae8a45058828628e889600f2bab0ddb4cd30c07a0c4d639fbd5c54ac6badec5911949b1cde3528a766afdf230f51ad4447b1c09d3fc5491#npm:4.0.4"],\
             ["vite-plugin-html", "virtual:e1da758ff74e234d0ae8a45058828628e889600f2bab0ddb4cd30c07a0c4d639fbd5c54ac6badec5911949b1cde3528a766afdf230f51ad4447b1c09d3fc5491#npm:3.2.0"]\
           ],\
@@ -380,10 +380,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/uuid", [\
-        ["npm:8.3.4", {\
-          "packageLocation": "./.yarn/cache/@types-uuid-npm-8.3.4-7547f4402c-6f11f3ff70.zip/node_modules/@types/uuid/",\
+        ["npm:9.0.7", {\
+          "packageLocation": "./.yarn/cache/@types-uuid-npm-9.0.7-c380bb8654-c7321194ae.zip/node_modules/@types/uuid/",\
           "packageDependencies": [\
-            ["@types/uuid", "npm:8.3.4"]\
+            ["@types/uuid", "npm:9.0.7"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -990,10 +990,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["fishes", "workspace:."],\
-            ["@types/uuid", "npm:8.3.4"],\
+            ["@types/uuid", "npm:9.0.7"],\
             ["prettier", "npm:3.1.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"],\
-            ["uuid", "npm:9.0.0"],\
+            ["uuid", "npm:9.0.1"],\
             ["vite", "virtual:e1da758ff74e234d0ae8a45058828628e889600f2bab0ddb4cd30c07a0c4d639fbd5c54ac6badec5911949b1cde3528a766afdf230f51ad4447b1c09d3fc5491#npm:4.0.4"],\
             ["vite-plugin-html", "virtual:e1da758ff74e234d0ae8a45058828628e889600f2bab0ddb4cd30c07a0c4d639fbd5c54ac6badec5911949b1cde3528a766afdf230f51ad4447b1c09d3fc5491#npm:3.2.0"]\
           ],\
@@ -2138,10 +2138,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["uuid", [\
-        ["npm:9.0.0", {\
-          "packageLocation": "./.yarn/cache/uuid-npm-9.0.0-46c41e3e43-8dd2c83c43.zip/node_modules/uuid/",\
+        ["npm:9.0.1", {\
+          "packageLocation": "./.yarn/cache/uuid-npm-9.0.1-39a8442bc6-39931f6da7.zip/node_modules/uuid/",\
           "packageDependencies": [\
-            ["uuid", "npm:9.0.0"]\
+            ["uuid", "npm:9.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
