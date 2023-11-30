@@ -45,8 +45,12 @@ export class Fish extends Entity {
     this.initialProps = props;
     this.attachComponent(new Name(this, "Fish"))
       .attachComponent(new Energy(this, props.initialEnergy))
-      .attachComponent(new Position(this, new Vector2(props.position.x, props.position.y)))
-      .attachComponent(new Facing(this, new Vector2(props.facing.x, props.facing.y)))
+      .attachComponent(
+        new Position(this, new Vector2(props.position.x, props.position.y)),
+      )
+      .attachComponent(
+        new Facing(this, new Vector2(props.facing.x, props.facing.y)),
+      )
       .attachComponent(
         new Color(
           this,
@@ -57,7 +61,9 @@ export class Fish extends Entity {
         ),
       )
       .attachComponent(new Age(this))
-      .attachComponent(new Velocity(this, new Vector2(props.velocity.x, props.velocity.y)))
+      .attachComponent(
+        new Velocity(this, new Vector2(props.velocity.x, props.velocity.y)),
+      )
       .attachComponent(new Drag(this, props.drag))
       .attachComponent(
         new FacingAlignedImpulse(
@@ -113,13 +119,15 @@ export class Fish extends Entity {
 
   reproduce(): Fish {
     const newProps: FishProps = { ...this.initialProps };
-    newProps.position.x = this.position.vector.x + Math.floor((Math.random() - 0.5) * 100);
-    newProps.position.y = this.position.vector.y + Math.floor((Math.random() - 0.5) * 100);
+    newProps.position.x =
+      this.position.vector.x + Math.floor((Math.random() - 0.5) * 100);
+    newProps.position.y =
+      this.position.vector.y + Math.floor((Math.random() - 0.5) * 100);
     newProps.initialEnergy = this.energy.energy / 2;
     newProps.velocity.x = 0;
     newProps.velocity.y = 0;
     this.energy.energy /= 2;
-    console.log('reproduced', newProps);
+    console.log("reproduced", newProps);
     return new Fish(newProps);
   }
 
