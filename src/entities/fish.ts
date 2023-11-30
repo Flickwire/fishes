@@ -5,7 +5,6 @@ import { World } from "../engine/world";
 
 import {
   Age,
-  MaxAge,
   Position,
   Color,
   Velocity,
@@ -15,6 +14,7 @@ import {
   FacingAlignedImpulse,
   Energy,
   SeeksFood,
+  Edible,
 } from "../components";
 import { Reproduces } from "../components/reproduces";
 
@@ -30,6 +30,7 @@ export type FishProps = {
   seekFrequency: number;
   initialEnergy: number;
   reproductionThreshold: number;
+  edible: boolean;
 };
 
 export class Fish extends Entity {
@@ -67,6 +68,10 @@ export class Fish extends Entity {
       )
       .attachComponent(new SeeksFood(this, props.seekFrequency))
       .attachComponent(new Reproduces(this, props.reproductionThreshold));
+
+    if (props.edible) {
+      this.attachComponent(new Edible(this));
+    }
 
     this.color = this.getComponentOfType(Color);
     this.position = this.getComponentOfType(Position);
@@ -139,6 +144,7 @@ export class Fish extends Entity {
       ),
       initialEnergy: Math.max(50, Math.random() * 200),
       reproductionThreshold: Math.max(30, Math.random() * 400),
+      edible: Math.random() < 0.5,
     };
     return new Fish(props);
   }
