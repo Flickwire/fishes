@@ -6,13 +6,14 @@ import { FishSpawner } from "./entities/fishSpawner";
 import { EntityCounter } from "./entities/entityCounter";
 import { AlgaeSpawner } from "./entities/algaeSpawner";
 import { Age, MaxAge } from "./components";
+import { Fish } from "./entities/fish";
 
 const run = (): void => {
   const world = new World();
   const fishSpawner = new FishSpawner(world, 0);
   fishSpawner
     .attachComponent(new Age(fishSpawner))
-    .attachComponent(new MaxAge(fishSpawner, 10));
+    .attachComponent(new MaxAge(fishSpawner, 5));
   world.spawnEntity(fishSpawner);
   world.spawnEntity(new AlgaeSpawner(world, 1000 / 3));
   world.spawnEntity(new EntityCounter(world));
