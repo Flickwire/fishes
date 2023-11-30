@@ -1,11 +1,10 @@
 import { Entity, Component } from "../engine/entity";
 
 export class Name extends Component {
-
-  name: string
+  name: string;
 
   constructor(entity: Entity, name: string) {
-    super(entity)
-    this.name = name
+    super(entity);
+    this.name = name;
   }
 }

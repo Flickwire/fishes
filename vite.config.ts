@@ -1,12 +1,12 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
 
-import { createHtmlPlugin } from 'vite-plugin-html'
+import { createHtmlPlugin } from "vite-plugin-html";
 
 export default defineConfig({
-  root: 'src',
+  root: "src",
   build: {
     // Relative to the root
-    outDir: '../dist',
+    outDir: "../dist",
   },
   plugins: [
     createHtmlPlugin({
@@ -14,9 +14,9 @@ export default defineConfig({
 
       inject: {
         data: {
-          title: 'Fish Toy',
+          title: "Fish Toy",
         },
       },
     }),
   ],
-})
+});
