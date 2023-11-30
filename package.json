@@ -10,7 +10,7 @@
     "@types/uuid": "latest",
     "prettier": "3.1.0",
     "typescript": "^5.3.2",
-    "vite": "^4.0.4",
+    "vite": "^5.0.4",
     "vite-plugin-html": "^3.2.0"
   },
   "scripts": {
