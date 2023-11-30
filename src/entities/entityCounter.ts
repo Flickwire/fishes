@@ -4,37 +4,38 @@ import { Vector2 } from "../engine/types/vector2";
 import { World } from "../engine/world";
 
 class MeasureEntities extends Component {
-
-  entities: number
+  entities: number;
 
   constructor(entity: Entity) {
-    super(entity)
-    this.entities = 0
+    super(entity);
+    this.entities = 0;
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {
-    this.entities = Object.keys(this.entity.world.entities).length
-  }
+    this.entities = Object.keys(this.entity.world.entities).length;
+  };
 }
 
 export class EntityCounter extends Entity {
-
-  measurement: MeasureEntities
-  position: Position
+  measurement: MeasureEntities;
+  position: Position;
 
   constructor(world: World) {
-    super(world)
-    this
-      .attachComponent(new Name(this, 'FPS Counter'))
+    super(world);
+    this.attachComponent(new Name(this, "FPS Counter"))
       .attachComponent(new Position(this, new Vector2(10, 60)))
-      .attachComponent(new MeasureEntities(this))
-    this.measurement = this.getComponentOfType(MeasureEntities)
-    this.position = this.getComponentOfType(Position)
+      .attachComponent(new MeasureEntities(this));
+    this.measurement = this.getComponentOfType(MeasureEntities);
+    this.position = this.getComponentOfType(Position);
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle = 'black'
-    ctx.font = '24px sans-serif'
-    ctx.fillText(`E: ${this.measurement.entities}`, this.position.vector.x, this.position.vector.y)
+    ctx.fillStyle = "black";
+    ctx.font = "24px sans-serif";
+    ctx.fillText(
+      `E: ${this.measurement.entities}`,
+      this.position.vector.x,
+      this.position.vector.y,
+    );
   }
 }
