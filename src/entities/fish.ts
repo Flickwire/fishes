@@ -16,6 +16,7 @@ import {
   Energy,
   SeeksFood,
 } from "../components";
+import { Reproduces } from "../components/reproduces";
 
 export type FishProps = {
   world: World;
@@ -27,8 +28,8 @@ export type FishProps = {
   impulseStrength: number;
   impulseFrequency: number;
   seekFrequency: number;
-  maxAge: number;
   initialEnergy: number;
+  reproductionThreshold: number;
 };
 
 export class Fish extends Entity {
@@ -36,15 +37,15 @@ export class Fish extends Entity {
   color: Color;
   facing: Facing;
   energy: Energy;
-  initialProps: { [key: string]: any };
+  initialProps: FishProps;
 
   constructor(props: FishProps) {
     super(props.world);
     this.initialProps = props;
     this.attachComponent(new Name(this, "Fish"))
       .attachComponent(new Energy(this, props.initialEnergy))
-      .attachComponent(new Position(this, props.position))
-      .attachComponent(new Facing(this, props.facing))
+      .attachComponent(new Position(this, new Vector2(props.position.x, props.position.y)))
+      .attachComponent(new Facing(this, new Vector2(props.facing.x, props.facing.y)))
       .attachComponent(
         new Color(
           this,
@@ -55,7 +56,7 @@ export class Fish extends Entity {
         ),
       )
       .attachComponent(new Age(this))
-      .attachComponent(new Velocity(this, props.velocity))
+      .attachComponent(new Velocity(this, new Vector2(props.velocity.x, props.velocity.y)))
       .attachComponent(new Drag(this, props.drag))
       .attachComponent(
         new FacingAlignedImpulse(
@@ -64,8 +65,8 @@ export class Fish extends Entity {
           props.impulseFrequency,
         ),
       )
-      .attachComponent(new MaxAge(this, props.maxAge))
-      .attachComponent(new SeeksFood(this, props.seekFrequency));
+      .attachComponent(new SeeksFood(this, props.seekFrequency))
+      .attachComponent(new Reproduces(this, props.reproductionThreshold));
 
     this.color = this.getComponentOfType(Color);
     this.position = this.getComponentOfType(Position);
@@ -105,6 +106,18 @@ export class Fish extends Entity {
     ctx.fill();
   }
 
+  reproduce(): Fish {
+    const newProps: FishProps = { ...this.initialProps };
+    newProps.position.x = this.position.vector.x + Math.floor((Math.random() - 0.5) * 100);
+    newProps.position.y = this.position.vector.y + Math.floor((Math.random() - 0.5) * 100);
+    newProps.initialEnergy = this.energy.energy / 2;
+    newProps.velocity.x = 0;
+    newProps.velocity.y = 0;
+    this.energy.energy /= 2;
+    console.log('reproduced', newProps);
+    return new Fish(newProps);
+  }
+
   static generate(world: World): Fish {
     const props = {
       position: new Vector2(
@@ -124,8 +137,8 @@ export class Fish extends Entity {
         Math.random() * 100,
         Math.max(0.5, Math.random()),
       ),
-      maxAge: Math.floor(Math.max(0.02, Math.random()) * 6000),
       initialEnergy: Math.max(50, Math.random() * 200),
+      reproductionThreshold: Math.max(30, Math.random() * 400),
     };
     return new Fish(props);
   }

@@ -19,6 +19,7 @@ export abstract class Component {
 
 export interface Entity {
   draw?(ctx: CanvasRenderingContext2D): void;
+  reproduce?(): Entity;
 }
 
 export abstract class Entity {
