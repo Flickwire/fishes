@@ -29,7 +29,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@types/uuid", "npm:9.0.7"],\
-            ["prettier", "npm:3.1.0"],\
+            ["prettier", "npm:3.2.2"],\
             ["typescript", "patch:typescript@npm%3A5.3.2#~builtin<compat/typescript>::version=5.3.2&hash=d73830"],\
             ["uuid", "npm:9.0.1"],\
             ["vite", "virtual:e1da758ff74e234d0ae8a45058828628e889600f2bab0ddb4cd30c07a0c4d639fbd5c54ac6badec5911949b1cde3528a766afdf230f51ad4447b1c09d3fc5491#npm:4.0.4"],\
@@ -991,7 +991,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["fishes", "workspace:."],\
             ["@types/uuid", "npm:9.0.7"],\
-            ["prettier", "npm:3.1.0"],\
+            ["prettier", "npm:3.2.2"],\
             ["typescript", "patch:typescript@npm%3A5.3.2#~builtin<compat/typescript>::version=5.3.2&hash=d73830"],\
             ["uuid", "npm:9.0.1"],\
             ["vite", "virtual:e1da758ff74e234d0ae8a45058828628e889600f2bab0ddb4cd30c07a0c4d639fbd5c54ac6badec5911949b1cde3528a766afdf230f51ad4447b1c09d3fc5491#npm:4.0.4"],\
@@ -1744,10 +1744,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["prettier", [\
-        ["npm:3.1.0", {\
-          "packageLocation": "./.yarn/unplugged/prettier-npm-3.1.0-708d6027b1/node_modules/prettier/",\
+        ["npm:3.2.2", {\
+          "packageLocation": "./.yarn/unplugged/prettier-npm-3.2.2-bd270a1ac0/node_modules/prettier/",\
           "packageDependencies": [\
-            ["prettier", "npm:3.1.0"]\
+            ["prettier", "npm:3.2.2"]\
           ],\
           "linkType": "HARD"\
         }]\
