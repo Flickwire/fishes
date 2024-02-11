@@ -28,7 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@types/uuid", "npm:9.0.7"],\
+            ["@types/uuid", "npm:9.0.8"],\
             ["prettier", "npm:3.2.5"],\
             ["typescript", "patch:typescript@npm%3A5.3.3#~builtin<compat/typescript>::version=5.3.3&hash=d73830"],\
             ["uuid", "npm:9.0.1"],\
@@ -515,10 +515,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/uuid", [\
-        ["npm:9.0.7", {\
-          "packageLocation": "./.yarn/cache/@types-uuid-npm-9.0.7-c380bb8654-c7321194ae.zip/node_modules/@types/uuid/",\
+        ["npm:9.0.8", {\
+          "packageLocation": "./.yarn/cache/@types-uuid-npm-9.0.8-3eeeaa5abb-b8c60b7ba8.zip/node_modules/@types/uuid/",\
           "packageDependencies": [\
-            ["@types/uuid", "npm:9.0.7"]\
+            ["@types/uuid", "npm:9.0.8"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1126,7 +1126,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["fishes", "workspace:."],\
-            ["@types/uuid", "npm:9.0.7"],\
+            ["@types/uuid", "npm:9.0.8"],\
             ["prettier", "npm:3.2.5"],\
             ["typescript", "patch:typescript@npm%3A5.3.3#~builtin<compat/typescript>::version=5.3.3&hash=d73830"],\
             ["uuid", "npm:9.0.1"],\
