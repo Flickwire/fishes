@@ -856,7 +856,7 @@ __metadata:
     typescript: ^5.3.3
     uuid: latest
     vite: ^4.0.4
-    vite-plugin-html: ^3.2.0
+    vite-plugin-html: ^3.2.2
   languageName: unknown
   linkType: soft
 
@@ -1916,9 +1916,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-html@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "vite-plugin-html@npm:3.2.0"
+"vite-plugin-html@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "vite-plugin-html@npm:3.2.2"
   dependencies:
     "@rollup/pluginutils": ^4.2.0
     colorette: ^2.0.16
@@ -1934,7 +1934,7 @@ __metadata:
     pathe: ^0.2.0
   peerDependencies:
     vite: ">=2.0.0"
-  checksum: f5222247b65da1c36215f0b2f509fd3975a7426b8d44546beb49f3ba51ee87b3a6b6e6afc9e7567a0d8bd1016631f2db3f934808f62a7c8f7f83fa83d8561d2d
+  checksum: 2fd6e1f91f74a4432222ed28e68d5f27e58ccbc9ad44e71ff9d02b684b358b0c634bdb4dd32e9d93d09e88d83c3b7b74b89698e25510bc5b94173cdc067b3ac2
   languageName: node
   linkType: hard
 
