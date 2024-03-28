@@ -60,21 +60,23 @@ export class Algae extends Entity {
     this.energy = this.getComponentOfType(Energy);
   }
 
-  draw(ctx: CanvasRenderingContext2D): void {
+  draw(ctx: CanvasRenderingContext2D, offset: Vector2): void {
     const radius = this.energy.energy;
+    const screenSpaceX = this.position.vector.x - offset.x;
+    const screenSpaceY = this.position.vector.y - offset.y;
     if (
-      this.position.vector.x < -1 * radius ||
-      this.position.vector.x > ctx.canvas.width + radius ||
-      this.position.vector.y < -1 * radius ||
-      this.position.vector.y > ctx.canvas.height + radius
+      screenSpaceX < -1 * radius ||
+      screenSpaceX > ctx.canvas.width + radius ||
+      screenSpaceY < -1 * radius ||
+      screenSpaceY > ctx.canvas.height + radius
     ) {
       return;
     }
     ctx.fillStyle = this.color.toRGBA();
     ctx.beginPath();
     ctx.arc(
-      this.position.vector.x,
-      this.position.vector.y,
+      screenSpaceX,
+      screenSpaceY,
       radius,
       0,
       2 * Math.PI,

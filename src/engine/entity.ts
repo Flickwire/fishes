@@ -1,3 +1,4 @@
+import { Vector2 } from "./types/vector2";
 import { World } from "./world";
 import { v4 as uuidv4 } from "uuid";
 
@@ -18,7 +19,7 @@ export abstract class Component {
 }
 
 export interface Entity {
-  draw?(ctx: CanvasRenderingContext2D): void;
+  draw?(ctx: CanvasRenderingContext2D, offset: Vector2): void;
   reproduce?(): Entity;
 }
 

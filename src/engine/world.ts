@@ -1,4 +1,6 @@
 import { Entity } from "./entity";
+import { MouseEventHandler } from "./mouseEventHandler";
+import { Vector2 } from "./types/vector2";
 
 export class World {
   entities: { [id: string]: Entity };
@@ -6,12 +8,15 @@ export class World {
   lastUpdate: number;
   canvas: HTMLCanvasElement;
   renderContext: CanvasRenderingContext2D;
-  width: number = 500;
-  height: number = 500;
+  width: number = 5000;
+  height: number = 5000;
+  mouseEventHandler: MouseEventHandler;
+  windowOffset: Vector2 = new Vector2(0, 0);
 
   constructor() {
     this.canvas = document.createElement("canvas");
     this.renderContext = this.canvas.getContext("2d");
+    this.mouseEventHandler = new MouseEventHandler(this);
     document.body.append(this.canvas);
     console.log("world exists");
     this.lastUpdate = window.performance.now();
@@ -62,7 +67,7 @@ export class World {
     Object.keys(this.drawableEntities)
       .reverse()
       .forEach((id) => {
-        this.entities[id].draw(this.renderContext);
+        this.entities[id].draw(this.renderContext, this.windowOffset);
       });
   };
 

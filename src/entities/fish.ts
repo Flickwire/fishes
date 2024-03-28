@@ -85,26 +85,28 @@ export class Fish extends Entity {
     this.energy = this.getComponentOfType(Energy);
   }
 
-  draw(ctx: CanvasRenderingContext2D): void {
+  draw(ctx: CanvasRenderingContext2D, offset: Vector2): void {
+    const screenSpaceX = this.position.vector.x - offset.x;
+    const screenSpaceY = this.position.vector.y - offset.y;
     if (
-      this.position.vector.x < -10 ||
-      this.position.vector.x > ctx.canvas.width + 10 ||
-      this.position.vector.y < -10 ||
-      this.position.vector.y > ctx.canvas.height + 10
+      screenSpaceX < -10 ||
+      screenSpaceX > ctx.canvas.width + 10 ||
+      screenSpaceY < -10 ||
+      screenSpaceY > ctx.canvas.height + 10
     ) {
       return;
     }
     this.color.a = Math.min(this.energy.energy, 50) / 50;
     const facingNormal = this.facing.vector.normalise();
     const eyesPos = new Vector2(
-      this.position.vector.x + 9 * facingNormal.x,
-      this.position.vector.y + 9 * facingNormal.y,
+      screenSpaceX + 9 * facingNormal.x,
+      screenSpaceY + 9 * facingNormal.y,
     );
     ctx.fillStyle = this.color.toRGBA();
     ctx.beginPath();
     ctx.arc(
-      this.position.vector.x,
-      this.position.vector.y,
+      screenSpaceX,
+      screenSpaceY,
       15,
       0,
       2 * Math.PI,
