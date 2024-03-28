@@ -28,5 +28,21 @@ export class Velocity extends Component {
     const dY = mod * this.vector.y;
     this.position.vector.x += dX;
     this.position.vector.y += dY;
+    this.boundsCheck();
   };
+
+  boundsCheck = () => {
+    if (this.position.vector.y > this.entity.world.height) {
+      this.position.vector.y = this.entity.world.height
+    }
+    if (this.position.vector.y < 0) {
+      this.position.vector.y = 0
+    }
+    if (this.position.vector.x > this.entity.world.width) {
+      this.position.vector.x = this.entity.world.width
+    }
+    if (this.position.vector.x < 0) {
+      this.position.vector.x = 0
+    }
+  }
 }
