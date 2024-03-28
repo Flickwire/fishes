@@ -134,8 +134,8 @@ export class Fish extends Entity {
   static generate(world: World): Fish {
     const props = {
       position: new Vector2(
-        Math.random() * world.canvas.width,
-        Math.random() * world.canvas.height,
+        Math.random() * world.width,
+        Math.random() * world.height,
       ),
       velocity: new Vector2(Math.random() - 0.5, Math.random() - 0.5),
       drag: 1.05,

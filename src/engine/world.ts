@@ -6,6 +6,8 @@ export class World {
   lastUpdate: number;
   canvas: HTMLCanvasElement;
   renderContext: CanvasRenderingContext2D;
+  width: number = 2000;
+  height: number = 2000;
 
   constructor() {
     this.canvas = document.createElement("canvas");
