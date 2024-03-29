@@ -128,6 +128,8 @@ export class Fish extends Entity {
     newProps.initialEnergy = this.energy.energy / 2;
     newProps.velocity.x = 0;
     newProps.velocity.y = 0;
+    newProps.drag += 0.05 - (Math.random() / 10);
+    newProps.impulseStrength += (Math.random() * 10) - 5;
     this.energy.energy /= 2;
     return new Fish(newProps);
   }
@@ -153,7 +155,7 @@ export class Fish extends Entity {
       ),
       initialEnergy: Math.max(50, Math.random() * 200),
       reproductionThreshold: Math.max(30, Math.random() * 400),
-      edible: Math.random() < 0.5,
+      edible: Math.random() < 0.1,
     };
     return new Fish(props);
   }
