@@ -12,8 +12,10 @@ export interface Component {
 }
 
 export abstract class Component {
+  id: string;
   entity: Entity;
   constructor(entity: Entity) {
+    this.id = uuidv4();
     this.entity = entity;
   }
 }
@@ -25,7 +27,7 @@ export interface Entity {
 
 export abstract class Entity {
   components: { [key: string]: Component };
-  subscribedComponents: Component[];
+  subscribedComponents: { [key: string]: Component };
   props: { [key: string]: any };
   world: World;
 
@@ -33,56 +35,50 @@ export abstract class Entity {
     this.world = world;
     this.props = {};
     this.components = {};
-    this.subscribedComponents = [];
+    this.subscribedComponents = {};
     this.props.id = uuidv4();
-    //console.log(`Spawned entity ${this.props.id} @ ${window.performance.now()}`)
   }
 
   attachComponent(component: Component): Entity {
-    this.components[component.constructor.name] = component;
+    this.components[component.id] = component;
     if (typeof component.update === "function") {
-      this.subscribedComponents.push(component);
+      this.subscribedComponents[component.id] = component;
     }
     return this;
   }
 
   detachComponent(component: Component): Entity {
-    delete this.components[component.constructor.name];
-    this.subscribedComponents.forEach((subscribedComponent, i) => {
-      if (subscribedComponent.constructor.name === component.constructor.name) {
-        delete this.subscribedComponents[i];
-      }
-    });
+    delete this.components[component.id];
+    delete this.subscribedComponents[component.id];
     return this;
   }
 
-  getComponentOfType<T>(type: typeof Component): T | null {
+  getComponentsOfType<T extends Component>(type: typeof Component): T[] | null {
     const typeName = type.name;
+    const results = [];
+    for (const componentId in this.components) {
+      if (this.components[componentId].constructor.name === typeName) {
+        results.push(this.components[componentId]);
+      }
+    }
     if (
-      typeof this.components[typeName] !== "undefined" &&
-      this.components[typeName] instanceof type
+      results.length > 0
     ) {
-      return <T>this.components[typeName];
+      return <T[]>results;
     }
     return null;
   }
 
   hasComponentOfType(type: typeof Component) {
-    const typeName = type.name;
-    if (
-      typeof this.components[typeName] !== "undefined" &&
-      this.components[typeName] instanceof type
-    ) {
-      return true;
-    }
-    return false;
+    const components = this.getComponentsOfType<Component>(type);
+    return Array.isArray(components);
   }
 
   update(time: number, lastTime: number): void {
     const parameters: ComponentUpdateProps = { time, lastTime };
-    this.subscribedComponents.forEach((component) => {
-      component.update(parameters);
-    });
+    for (const componentId in this.subscribedComponents) {
+      this.components[componentId].update(parameters);
+    };
   }
 
   getProp(name: string, dfault: any = null): any {

@@ -36,12 +36,12 @@ export class Hunting extends Component {
     if (!target.hasComponentOfType(Position)) {
       throw new Error("Cannot hunt entity which has no Position");
     }
-    this.energy = this.entity.getComponentOfType(Energy);
-    this.position = this.entity.getComponentOfType(Position);
-    this.facing = this.entity.getComponentOfType(Facing);
+    this.energy = this.entity.getComponentsOfType<Energy>(Energy)[0];
+    this.position = this.entity.getComponentsOfType<Position>(Position)[0];
+    this.facing = this.entity.getComponentsOfType<Facing>(Facing)[0];
     this.target = target;
-    this.targetEnergy = this.target.getComponentOfType(Energy);
-    this.targetPosition = this.target.getComponentOfType(Position);
+    this.targetEnergy = this.target.getComponentsOfType<Energy>(Energy)[0];
+    this.targetPosition = this.target.getComponentsOfType<Position>(Position)[0];
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {

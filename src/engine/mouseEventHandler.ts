@@ -46,7 +46,6 @@ export class MouseEventHandler {
                 handler.moveViewportTouch(e);
                 break;
         }
-        console.log(e);
     }
 
     public moveViewport(e: MouseEvent): void {

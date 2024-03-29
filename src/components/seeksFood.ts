@@ -32,13 +32,13 @@ export class SeeksFood extends Component {
     if (!entity.hasComponentOfType(Energy)) {
       this.consumesEnergy = false;
     } else {
-      this.energy = this.entity.getComponentOfType(Energy);
+      this.energy = this.entity.getComponentsOfType<Energy>(Energy)[0];
     }
     this.frequency = frequency * 1000;
     this.lastApplied = window.performance.now();
     this.nextApply = this.lastApplied + this.frequency;
-    this.position = this.entity.getComponentOfType(Position);
-    this.facing = this.entity.getComponentOfType(Facing);
+    this.position = this.entity.getComponentsOfType<Position>(Position)[0];
+    this.facing = this.entity.getComponentsOfType<Facing>(Facing)[0];
   }
 
   findNearestEdibleEntity(): {
@@ -58,7 +58,7 @@ export class SeeksFood extends Component {
         entity.props.id !== this.entity.props.id
       ) {
         const pointing = this.position.vector.vectorTo(
-          entity.getComponentOfType<Position>(Position).vector,
+          entity.getComponentsOfType<Position>(Position)[0].vector,
         );
         const magnitude = pointing.magnitude();
         if (magnitude < closestDistance) {

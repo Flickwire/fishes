@@ -32,14 +32,14 @@ export class FacingAlignedImpulse extends Component {
     if (!entity.hasComponentOfType(Energy)) {
       this.consumesEnergy = false;
     } else {
-      this.energy = this.entity.getComponentOfType(Energy);
+      this.energy = this.entity.getComponentsOfType<Energy>(Energy)[0];
     }
     this.magnitude = magnitude;
     this.frequency = frequency * 1000;
     this.lastApplied = window.performance.now();
     this.nextApply = this.lastApplied + this.frequency;
-    this.velocity = this.entity.getComponentOfType(Velocity);
-    this.facing = this.entity.getComponentOfType(Facing);
+    this.velocity = this.entity.getComponentsOfType<Velocity>(Velocity)[0];
+    this.facing = this.entity.getComponentsOfType<Facing>(Facing)[0];
   }
 
   update = ({ time }: ComponentUpdateProps): void => {

@@ -22,7 +22,7 @@ export class MomentumAlignedImpulse extends Component {
     this.frequency = frequency * 1000;
     this.lastApplied = 0;
     this.nextApply = this.lastApplied + this.frequency;
-    this.velocity = this.entity.getComponentOfType(Velocity);
+    this.velocity = this.entity.getComponentsOfType<Velocity>(Velocity)[0];
   }
 
   update = ({ time }: ComponentUpdateProps): void => {

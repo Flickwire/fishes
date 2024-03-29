@@ -55,9 +55,9 @@ export class Algae extends Entity {
       .attachComponent(new Edible(this))
       .attachComponent(new Photosynthesis(this, props.photosynthesisRate));
 
-    this.color = this.getComponentOfType(Color);
-    this.position = this.getComponentOfType(Position);
-    this.energy = this.getComponentOfType(Energy);
+    this.color = this.getComponentsOfType<Color>(Color)[0];
+    this.position = this.getComponentsOfType<Position>(Position)[0];
+    this.energy = this.getComponentsOfType<Energy>(Energy)[0];
   }
 
   draw(ctx: CanvasRenderingContext2D, offset: Vector2): void {

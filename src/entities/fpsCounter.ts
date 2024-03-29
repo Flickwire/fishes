@@ -39,8 +39,8 @@ export class FpsCounter extends Entity {
       .attachComponent(new Position(this, new Vector2(10, 30)))
       .attachComponent(new MeasureFPS(this));
 
-    this.position = this.getComponentOfType(Position);
-    this.measurement = this.getComponentOfType(MeasureFPS);
+    this.position = this.getComponentsOfType<Position>(Position)[0];
+    this.measurement = this.getComponentsOfType<MeasureFPS>(MeasureFPS)[0];
   }
 
   draw(ctx: CanvasRenderingContext2D): void {

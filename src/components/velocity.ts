@@ -14,7 +14,7 @@ export class Velocity extends Component {
       );
     }
 
-    this.position = entity.getComponentOfType(Position);
+    this.position = entity.getComponentsOfType<Position>(Position)[0];
     this.vector = vector;
   }
 

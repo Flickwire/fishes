@@ -13,7 +13,7 @@ export class Photosynthesis extends Component {
         "Please add Energy component before Photosynthesis component",
       );
     }
-    this.energy = this.entity.getComponentOfType(Energy);
+    this.energy = this.entity.getComponentsOfType<Energy>(Energy)[0];
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {

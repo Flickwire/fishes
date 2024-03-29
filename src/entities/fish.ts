@@ -79,10 +79,10 @@ export class Fish extends Entity {
       this.attachComponent(new Edible(this));
     }
 
-    this.color = this.getComponentOfType(Color);
-    this.position = this.getComponentOfType(Position);
-    this.facing = this.getComponentOfType(Facing);
-    this.energy = this.getComponentOfType(Energy);
+    this.color = this.getComponentsOfType<Color>(Color)[0];
+    this.position = this.getComponentsOfType<Position>(Position)[0];
+    this.facing = this.getComponentsOfType<Facing>(Facing)[0];
+    this.energy = this.getComponentsOfType<Energy>(Energy)[0];
   }
 
   draw(ctx: CanvasRenderingContext2D, offset: Vector2): void {
@@ -129,7 +129,6 @@ export class Fish extends Entity {
     newProps.velocity.x = 0;
     newProps.velocity.y = 0;
     this.energy.energy /= 2;
-    console.log("reproduced", newProps);
     return new Fish(newProps);
   }
 

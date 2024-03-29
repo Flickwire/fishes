@@ -25,8 +25,8 @@ export class EntityCounter extends Entity {
     this.attachComponent(new Name(this, "FPS Counter"))
       .attachComponent(new Position(this, new Vector2(10, 60)))
       .attachComponent(new MeasureEntities(this));
-    this.measurement = this.getComponentOfType(MeasureEntities);
-    this.position = this.getComponentOfType(Position);
+    this.measurement = this.getComponentsOfType<MeasureEntities>(MeasureEntities)[0];
+    this.position = this.getComponentsOfType<Position>(Position)[0];
   }
 
   draw(ctx: CanvasRenderingContext2D): void {

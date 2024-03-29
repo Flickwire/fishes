@@ -13,7 +13,7 @@ export class MaxAge extends Component {
       throw new Error("Please add Age component before MaxAge component");
     }
 
-    this.age = entity.getComponentOfType(Age);
+    this.age = entity.getComponentsOfType<Age>(Age)[0];
     this.maxAge = maxAge;
   }
 

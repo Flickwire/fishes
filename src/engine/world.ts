@@ -18,7 +18,6 @@ export class World {
     this.renderContext = this.canvas.getContext("2d");
     this.mouseEventHandler = new MouseEventHandler(this);
     document.body.append(this.canvas);
-    console.log("world exists");
     this.lastUpdate = window.performance.now();
     this.entities = {};
     this.drawableEntities = {};

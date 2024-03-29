@@ -11,7 +11,7 @@ export class Drag extends Component {
       throw new Error("Please add velocity component before drag component");
     }
     this.dragFactor = dragFactor;
-    this.velocity = this.entity.getComponentOfType(Velocity);
+    this.velocity = this.entity.getComponentsOfType<Velocity>(Velocity)[0];
   }
 
   update = ({ time, lastTime }: ComponentUpdateProps): void => {

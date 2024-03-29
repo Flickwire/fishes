@@ -18,7 +18,7 @@ export class Reproduces extends Component {
         "Entity must have Energy component before adding Reproduces component",
       );
     }
-    this.energy = this.entity.getComponentOfType(Energy);
+    this.energy = this.entity.getComponentsOfType<Energy>(Energy)[0];
     this.threshold = threshold;
   }
 
