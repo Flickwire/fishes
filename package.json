@@ -9,7 +9,7 @@
   "devDependencies": {
     "@types/uuid": "latest",
     "prettier": "3.2.5",
-    "typescript": "^5.4.3",
+    "typescript": "^5.4.4",
     "vite": "^5.1.1",
     "vite-plugin-html": "^3.2.2"
   },
